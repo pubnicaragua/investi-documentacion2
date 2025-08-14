@@ -9,6 +9,11 @@ export const metadata: Metadata = {
   title: "Investi - Red Social de Educación Financiera",
   description:
     "La primera red social de educación financiera potenciada con IA. Conecta, aprende y crece junto a miles de inversionistas.",
+  icons: {
+    icon: "/investi-favicon.png",
+    shortcut: "/investi-favicon.png",
+    apple: "/investi-favicon.png",
+  },
     generator: 'v0.app'
 }
 

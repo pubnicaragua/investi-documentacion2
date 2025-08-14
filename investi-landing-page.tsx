@@ -263,63 +263,69 @@ export default function InvestiLandingPage() {
         />
       ),
       title: "IA Personalizada",
-      description: "Conecta, Aprende y crece",
-      color: "bg-blue-500",
+      description: "Aprende con un mentor inteligente que se adapta a tu ritmo y estilo de aprendizaje.",
+      color: "bg-gradient-to-br from-blue-500 to-purple-500",
+      hasBackground: false,
     },
     {
       icon: Users,
-      title: "Comunidades Vibrantes",
-      description: "Conecta con inversionistas que comparten tus intereses y objetivos financieros.",
-      color: "bg-blue-500",
+      title: "Comunidades de Aprendizaje",
+      description: "Conecta con personas que comparten tus metas de crecimiento financiero.",
+      color: "bg-gradient-to-br from-green-500 to-blue-500",
+      hasBackground: true,
     },
     {
       icon: GraduationCap,
       title: "Educación Gamificada",
-      description: "Aprende con cursos interactivos, desafíos y minijuegos que hacen divertido el aprendizaje.",
-      color: "bg-yellow-500",
+      description: "Aprende conceptos financieros de forma divertida con cursos interactivos y desafíos.",
+      color: "bg-gradient-to-br from-yellow-500 to-orange-500",
+      hasBackground: true,
     },
     {
       icon: Rocket,
-      title: "Zona de Emprendimiento y Startups",
-      description: "Un espacio para descubrir y potenciar proyectos innovadores.",
-      color: "bg-purple-500",
+      title: "Crecimiento Personal",
+      description: "Desarrolla habilidades financieras que transformarán tu relación con el dinero.",
+      color: "bg-gradient-to-br from-purple-500 to-pink-500",
+      hasBackground: true,
     },
     {
       icon: Handshake,
-      title: "Conecta con Inversionistas Angeles",
-      description: "Acceso exclusivo para conectar con inversionistas ángeles y potenciar tu proyecto.",
-      color: "bg-pink-500",
+      title: "Red de Mentores",
+      description: "Accede a expertos en finanzas personales y educadores certificados.",
+      color: "bg-gradient-to-br from-pink-500 to-red-500",
+      hasBackground: true,
     },
     {
       icon: BarChart3,
-      title: "Análisis Avanzado",
-      description: "Herramientas profesionales de análisis para tomar decisiones informadas.",
-      color: "bg-indigo-500",
+      title: "Herramientas Educativas",
+      description: "Simuladores y calculadoras para practicar sin riesgo financiero real.",
+      color: "bg-gradient-to-br from-indigo-500 to-blue-500",
+      hasBackground: true,
     },
   ]
 
   const communities = [
     {
-      name: "Inversiones para principiantes",
-      members: "12k miembros",
+      name: "Finanzas para principiantes",
+      members: "12k estudiantes",
       type: "Comunidad pública",
-      icon: "📈",
+      icon: "📚",
       color: "from-blue-500 to-blue-600",
       isPrivate: false,
     },
     {
-      name: "Criptomonedas para principiantes",
-      members: "2k miembros",
+      name: "Educación financiera avanzada",
+      members: "2k estudiantes",
       type: "Comunidad privada",
-      icon: "₿",
+      icon: "🎓",
       color: "from-amber-600 to-amber-700",
       isPrivate: true,
     },
     {
-      name: "Startups & VC",
-      members: "8.5k miembros",
+      name: "Emprendimiento & Finanzas",
+      members: "8.5k estudiantes",
       type: "Comunidad pública",
-      icon: "🚀",
+      icon: "💡",
       color: "from-purple-500 to-purple-600",
       isPrivate: false,
     },
@@ -328,27 +334,27 @@ export default function InvestiLandingPage() {
   const testimonials = [
     {
       name: "María González",
-      role: "Emprendedora",
+      role: "Estudiante de Finanzas",
       content:
-        "Investï cambió completamente mi perspectiva sobre las inversiones. En 3 meses aprendí más que en años de intentarlo sola. La comunidad es increíble y Irï siempre tiene las respuestas que necesito.",
+        "Investï transformó mi comprensión sobre finanzas personales. Los cursos interactivos y la comunidad me ayudaron a desarrollar hábitos financieros saludables que nunca pensé que podría lograr.",
       avatar:
         "https://socialmediamkt.softwarenicaragua.com/wp-content/uploads/2025/08/iri-icono-tipografia-Sin-fondo-.gif",
       rating: 5,
     },
     {
       name: "Carlos Ruiz",
-      role: "Ingeniero de Software",
+      role: "Emprendedor",
       content:
-        "La comunidad de cripto en Investï es increíble. He hecho conexiones valiosas y mi portafolio simulado ha crecido 40%. Definitivamente la mejor plataforma para aprender inversiones.",
+        "La plataforma educativa de Investï es increíble. Aprendí desde presupuesto básico hasta planificación financiera avanzada. Irï siempre está ahí para guiarme en mi proceso de aprendizaje.",
       avatar:
         "https://socialmediamkt.softwarenicaragua.com/wp-content/uploads/2025/08/iri-icono-tipografia-Sin-fondo-.gif",
       rating: 5,
     },
     {
       name: "Ana Martínez",
-      role: "Doctora",
+      role: "Profesional",
       content:
-        "Como principiante total, Irï me guió paso a paso desde cero. Ahora tengo confianza para tomar mis propias decisiones de inversión. ¡No puedo esperar al lanzamiento oficial!",
+        "Como alguien sin conocimientos financieros, Investï me dio las herramientas y confianza para tomar control de mis finanzas. La educación gamificada hace que aprender sea divertido y efectivo.",
       avatar:
         "https://socialmediamkt.softwarenicaragua.com/wp-content/uploads/2025/08/iri-icono-tipografia-Sin-fondo-.gif",
       rating: 5,
@@ -359,30 +365,30 @@ export default function InvestiLandingPage() {
     {
       phase: "Fase 1",
       title: "Beta Cerrado",
-      description: "Acceso exclusivo para los primeros 1000 usuarios con todas las funciones principales",
+      description: "Acceso exclusivo para los primeros 1000 usuarios con todas las funciones educativas principales",
       status: "current",
-      date: "Q1 2024",
+      date: "Agosto 2025",
     },
     {
       phase: "Fase 2",
       title: "Lanzamiento Público",
-      description: "Apertura completa de la plataforma con nuevas funciones y comunidades",
+      description: "Apertura completa de la plataforma educativa con nuevos cursos y comunidades",
       status: "upcoming",
-      date: "Q2 2024",
+      date: "Septiembre 2025",
     },
     {
       phase: "Fase 3",
-      title: "Inversiones Reales",
-      description: "Integración con brokers regulados para inversiones reales desde la plataforma",
+      title: "Próximamente",
+      description: "Nuevas funcionalidades educativas y herramientas avanzadas de aprendizaje",
       status: "upcoming",
-      date: "Q3 2024",
+      date: "Noviembre 2025",
     },
     {
       phase: "Fase 4",
-      title: "Zona Startups y Emprendimientos",
-      description: "Plataforma completa de crowdfunding y conexión con inversionistas ángeles",
+      title: "Próximamente",
+      description: "Expansión de la plataforma con nuevas características educativas",
       status: "upcoming",
-      date: "Q4 2024",
+      date: "Diciembre 2025",
     },
   ]
 
@@ -421,8 +427,8 @@ export default function InvestiLandingPage() {
         <div className="w-full max-w-7xl flex items-center justify-between">
           <Link href="#" className="flex items-center gap-3">
             <Image
-              src="https://socialmediamkt.softwarenicaragua.com/wp-content/uploads/2025/08/Group-6-1.png"
-              alt="Investï Community"
+              src="/investi-logo-main.png"
+              alt="Investï - Plataforma de Educación Financiera"
               width={150}
               height={40}
               className="h-10 w-auto"
@@ -482,14 +488,13 @@ export default function InvestiLandingPage() {
                     con tu
                     <br />
                     <span className="bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">
-                      Futuro
+                      Futuro Financiero
                     </span>
                   </h1>
                   <p className="text-xl md:text-2xl text-gray-600 leading-relaxed">
-                    La primera Red Socïal de Educación Financiera y Inversionistas del Mundo, Potenciada con
-                    inteligencia Artificial.
-                    <span className="font-semibold text-blue-600"> Conecta, Aprende y crece</span> junto a miles de
-                    personas en todo el Mundo.
+                    La primera plataforma de educación financiera potenciada con IA.
+                    <span className="font-semibold text-blue-600"> Aprende, conecta y crece</span> junto a miles de
+                    personas que buscan mejorar su futuro financiero.
                   </p>
                 </div>
 
@@ -526,16 +531,20 @@ export default function InvestiLandingPage() {
               </div>
 
               <div className="relative flex justify-center">
-                <div className="relative w-full max-w-lg">
-                  <Image
-                    src="https://socialmediamkt.softwarenicaragua.com/wp-content/uploads/2025/08/iri-icono-tipografia-Sin-fondo-.gif"
+                <div className="relative w-full max-w-lg px-4">
+                  <video
                     width={600}
                     height={600}
-                    alt="Crecimiento financiero con Investï"
-                    className="object-contain w-full h-auto animate-float"
-                    priority
-                    unoptimized
-                  />
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="object-contain w-full h-auto rounded-2xl shadow-2xl"
+                    style={{ maxHeight: "500px" }}
+                  >
+                    <source src="https://socialmediamkt.softwarenicaragua.com/wp-content/uploads/2025/08/WhatsApp-Video-2025-08-13-at-19.40.19.mp4" type="video/mp4" />
+                    Tu navegador no soporta el elemento de video.
+                  </video>
                 </div>
               </div>
             </div>
@@ -560,18 +569,31 @@ export default function InvestiLandingPage() {
               {features.map((feature, index) => (
                 <Card
                   key={index}
-                  className="group hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border-0 bg-white rounded-3xl overflow-hidden"
+                  className="group hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border-0 bg-white overflow-hidden"
+                  style={{
+                    borderRadius: "2rem 2rem 2rem 0.5rem",
+                    background: "white",
+                  }}
                 >
                   <CardHeader className="pb-4 text-center">
-                    <div
-                      className={`w-20 h-20 ${feature.color} rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 mx-auto`}
-                    >
-                      {typeof feature.icon === "function" ? (
-                        feature.icon()
-                      ) : (
-                        <feature.icon className="h-10 w-10 text-white" />
-                      )}
-                    </div>
+                    {feature.hasBackground ? (
+                      <div
+                        className={`w-20 h-20 ${feature.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 mx-auto`}
+                        style={{
+                          borderRadius: "2rem 2rem 2rem 0.5rem",
+                        }}
+                      >
+                        {typeof feature.icon === "function" ? (
+                          feature.icon()
+                        ) : (
+                          <feature.icon className="h-10 w-10 text-white" />
+                        )}
+                      </div>
+                    ) : (
+                      <div className="w-20 h-20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 mx-auto">
+                        {typeof feature.icon === "function" ? feature.icon() : <feature.icon className="h-10 w-10" />}
+                      </div>
+                    )}
                     <CardTitle className="text-2xl font-bold group-hover:text-blue-600 transition-colors">
                       {feature.title}
                     </CardTitle>
@@ -599,61 +621,11 @@ export default function InvestiLandingPage() {
                   <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
                     Conoce a <span className="text-yellow-300">Irï</span>
                   </h2>
-                  <p className="text-xl leading-relaxed opacity-90">
-                    Tu{" "}
-                    <span className="font-semibold" style={{ color: "#4a1b47" }}>
-                      mentor
-                    </span>{" "}
-                    financiero{" "}
-                    <span className="font-semibold" style={{ color: "#4a1b47" }}>
-                      personal potenciado con Ïnteligencia Artificial
-                    </span>{" "}
-                    que te{" "}
-                    <span className="font-semibold" style={{ color: "#4a1b47" }}>
-                      acompañará
-                    </span>{" "}
-                    24/7 brindándote una{" "}
-                    <span className="font-semibold" style={{ color: "#4a1b47" }}>
-                      experiencia
-                    </span>{" "}
-                    <span className="font-semibold" style={{ color: "#4a1b47" }}>
-                      personalizada
-                    </span>{" "}
-                    <span className="font-semibold" style={{ color: "#4a1b47" }}>
-                      enseñandote
-                    </span>{" "}
-                    y{" "}
-                    <span className="font-semibold" style={{ color: "#4a1b47" }}>
-                      acompañándote
-                    </span>{" "}
-                    hacía tus{" "}
-                    <span className="font-semibold" style={{ color: "#4a1b47" }}>
-                      metas
-                    </span>{" "}
-                    <span className="font-semibold" style={{ color: "#4a1b47" }}>
-                      financieras
-                    </span>
-                    .{" "}
-                    <span className="font-semibold" style={{ color: "#4a1b47" }}>
-                      Irï
-                    </span>{" "}
-                    no te dará{" "}
-                    <span className="font-semibold" style={{ color: "#4a1b47" }}>
-                      recomendaciones
-                    </span>{" "}
-                    de{" "}
-                    <span className="font-semibold" style={{ color: "#4a1b47" }}>
-                      inversión
-                    </span>{" "}
-                    pero te guiará para tomes{" "}
-                    <span className="font-semibold" style={{ color: "#4a1b47" }}>
-                      decisiones
-                    </span>{" "}
-                    de manera{" "}
-                    <span className="font-semibold" style={{ color: "#4a1b47" }}>
-                      informada
-                    </span>
-                    .
+                  <p className="text-xl leading-relaxed text-white">
+                    Tu mentor financiero personal potenciado con Ïnteligencia Artificial que te acompañará 24/7
+                    brindándote una experiencia personalizada enseñandote y acompañándote hacía tus metas financieras.
+                    Irï no te dará recomendaciones de inversión pero te guiará para tomes decisiones de manera
+                    informada.
                   </p>
                 </div>
 
@@ -690,8 +662,8 @@ export default function InvestiLandingPage() {
                 Conecta con <span className="text-blue-600">tus intereses</span>
               </h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Regístrate en nuestra red social y descubre comunidades vibrantes dónde podrás compartir experiencias,
-                aprender y crecer junto a otros.
+                Únete a nuestra plataforma educativa y descubre comunidades de aprendizaje donde podrás compartir
+                conocimientos, hacer preguntas y crecer financieramente junto a otros estudiantes.
               </p>
             </div>
 
@@ -1055,7 +1027,7 @@ export default function InvestiLandingPage() {
             <div className="md:col-span-2">
               <div className="flex items-center gap-3 mb-6">
                 <Image
-                  src="https://socialmediamkt.softwarenicaragua.com/wp-content/uploads/2025/08/Group-6-1.png"
+                  src="/investi-logo-main.png"
                   alt="Investï Community"
                   width={150}
                   height={40}
