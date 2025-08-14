@@ -257,8 +257,8 @@ export default function InvestiLandingPage() {
         <Image
           src="https://socialmediamkt.softwarenicaragua.com/wp-content/uploads/2025/08/iri-icono-Sin-fondo.gif"
           alt="Irï Icon"
-          width={48}
-          height={48}
+          width={64}
+          height={64}
           unoptimized
         />
       ),
@@ -268,39 +268,74 @@ export default function InvestiLandingPage() {
       hasBackground: false,
     },
     {
-      icon: Users,
+      icon: () => (
+        <div
+          className="w-14 h-14 bg-blue-500 text-white flex items-center justify-center shadow-lg"
+          style={{ borderRadius: "1rem 1rem 1rem 0.3rem" }}
+        >
+          <Users className="h-7 w-7" />
+        </div>
+      ),
       title: "Comunidades de Aprendizaje",
       description: "Conecta con personas que comparten tus metas de crecimiento financiero.",
       color: "bg-gradient-to-br from-green-500 to-blue-500",
-      hasBackground: true,
+      hasBackground: false,
     },
     {
-      icon: GraduationCap,
+      icon: () => (
+        <div
+          className="w-14 h-14 bg-yellow-500 text-white flex items-center justify-center shadow-lg"
+          style={{ borderRadius: "1rem 1rem 1rem 0.3rem" }}
+        >
+          <GraduationCap className="h-7 w-7" />
+        </div>
+      ),
       title: "Educación Gamificada",
       description: "Aprende conceptos financieros de forma divertida con cursos interactivos y desafíos.",
       color: "bg-gradient-to-br from-yellow-500 to-orange-500",
-      hasBackground: true,
+      hasBackground: false,
     },
     {
-      icon: Rocket,
+      icon: () => (
+        <div
+          className="w-14 h-14 bg-purple-500 text-white flex items-center justify-center shadow-lg"
+          style={{ borderRadius: "1rem 1rem 1rem 0.3rem" }}
+        >
+          <Rocket className="h-7 w-7" />
+        </div>
+      ),
       title: "Crecimiento Personal",
       description: "Desarrolla habilidades financieras que transformarán tu relación con el dinero.",
       color: "bg-gradient-to-br from-purple-500 to-pink-500",
-      hasBackground: true,
+      hasBackground: false,
     },
     {
-      icon: Handshake,
+      icon: () => (
+        <div
+          className="w-14 h-14 bg-pink-500 text-white flex items-center justify-center shadow-lg"
+          style={{ borderRadius: "1rem 1rem 1rem 0.3rem" }}
+        >
+          <Handshake className="h-7 w-7" />
+        </div>
+      ),
       title: "Red de Mentores",
       description: "Accede a expertos en finanzas personales y educadores certificados.",
       color: "bg-gradient-to-br from-pink-500 to-red-500",
-      hasBackground: true,
+      hasBackground: false,
     },
     {
-      icon: BarChart3,
+      icon: () => (
+        <div
+          className="w-14 h-14 bg-indigo-500 text-white flex items-center justify-center shadow-lg"
+          style={{ borderRadius: "1rem 1rem 1rem 0.3rem" }}
+        >
+          <BarChart3 className="h-7 w-7" />
+        </div>
+      ),
       title: "Herramientas Educativas",
       description: "Simuladores y calculadoras para practicar sin riesgo financiero real.",
       color: "bg-gradient-to-br from-indigo-500 to-blue-500",
-      hasBackground: true,
+      hasBackground: false,
     },
   ]
 
@@ -485,10 +520,13 @@ export default function InvestiLandingPage() {
                     <span className="bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
                       Conecta
                     </span>{" "}
-                    con tu
+                    <span className="text-gray-900">con tu </span>
+                    <span className="bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">
+                      Futuro
+                    </span>
                     <br />
                     <span className="bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">
-                      Futuro Financiero
+                      Financiero
                     </span>
                   </h1>
                   <p className="text-xl md:text-2xl text-gray-600 leading-relaxed">
@@ -531,16 +569,15 @@ export default function InvestiLandingPage() {
               </div>
 
               <div className="relative flex justify-center">
-                <div className="relative w-full max-w-lg px-4">
+                {/* Wrapper que se ajusta al video y evita bordes blancos */}
+                <div className="inline-block overflow-hidden rounded-2xl shadow-2xl -mt-12">
                   <video
-                    width={600}
-                    height={600}
                     autoPlay
                     muted
                     loop
                     playsInline
-                    className="object-contain w-full h-auto rounded-2xl shadow-2xl"
-                    style={{ maxHeight: "500px" }}
+                    // El video define su propio tamaño
+                    className="block h-auto max-h-[450px] w-auto max-w-full"
                   >
                     <source src="https://socialmediamkt.softwarenicaragua.com/wp-content/uploads/2025/08/WhatsApp-Video-2025-08-13-at-19.40.19.mp4" type="video/mp4" />
                     Tu navegador no soporta el elemento de video.
@@ -576,24 +613,9 @@ export default function InvestiLandingPage() {
                   }}
                 >
                   <CardHeader className="pb-4 text-center">
-                    {feature.hasBackground ? (
-                      <div
-                        className={`w-20 h-20 ${feature.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 mx-auto`}
-                        style={{
-                          borderRadius: "2rem 2rem 2rem 0.5rem",
-                        }}
-                      >
-                        {typeof feature.icon === "function" ? (
-                          feature.icon()
-                        ) : (
-                          <feature.icon className="h-10 w-10 text-white" />
-                        )}
-                      </div>
-                    ) : (
-                      <div className="w-20 h-20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 mx-auto">
-                        {typeof feature.icon === "function" ? feature.icon() : <feature.icon className="h-10 w-10" />}
-                      </div>
-                    )}
+                    <div className="flex justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                      {typeof feature.icon === "function" ? feature.icon() : <feature.icon className="h-10 w-10" />}
+                    </div>
                     <CardTitle className="text-2xl font-bold group-hover:text-blue-600 transition-colors">
                       {feature.title}
                     </CardTitle>
@@ -622,10 +644,17 @@ export default function InvestiLandingPage() {
                     Conoce a <span className="text-yellow-300">Irï</span>
                   </h2>
                   <p className="text-xl leading-relaxed text-white">
-                    Tu mentor financiero personal potenciado con Ïnteligencia Artificial que te acompañará 24/7
-                    brindándote una experiencia personalizada enseñandote y acompañándote hacía tus metas financieras.
-                    Irï no te dará recomendaciones de inversión pero te guiará para tomes decisiones de manera
-                    informada.
+                    Tu <span className="text-yellow-300 font-semibold">mentor financiero personal</span> potenciado con{" "}
+                    <span className="text-yellow-300 font-semibold">Ïnteligencia Artificial</span> que te acompañará{" "}
+                    <span className="text-yellow-300 font-semibold">24/7</span> brindándote una{" "}
+                    <span className="text-yellow-300 font-semibold">experiencia personalizada</span> enseñandote y
+                    acompañándote hacía tus <span className="text-yellow-300 font-semibold">metas financieras</span>.
+                    Irï <span className="text-yellow-300 font-semibold">no te dará recomendaciones de inversión</span>{" "}
+                    pero te{" "}
+                    <span className="text-yellow-300 font-semibold">
+                      guiará para tomes decisiones de manera informada
+                    </span>
+                    .
                   </p>
                 </div>
 
@@ -1264,12 +1293,19 @@ export default function InvestiLandingPage() {
 
       {/* Floating Chat Button */}
       {!isChatOpen && (
-        <Button
-          className="fixed bottom-6 right-6 w-16 h-16 rounded-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white shadow-2xl z-40 animate-pulse"
+        <button
+          className="fixed bottom-6 right-6 w-16 h-16 rounded-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 shadow-2xl z-40 animate-pulse flex items-center justify-center"
           onClick={() => setIsChatOpen(true)}
         >
-          <MessageCircle className="h-6 w-6" />
-        </Button>
+          <Image
+            src="https://socialmediamkt.softwarenicaragua.com/wp-content/uploads/2025/08/iri-icono-Sin-fondo.gif"
+            alt="Chat with Irï"
+            width={40}
+            height={40}
+            unoptimized
+            className="rounded-full"
+          />
+        </button>
       )}
 
       <style jsx>{`
