@@ -6,21 +6,19 @@ import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Checkbox } from "@/components/ui/checkbox"
 import Image from "next/image"
 import Link from "next/link"
 import {
   Users,
-  GraduationCap,
   Share2,
   MessageCircle,
   Star,
   CheckCircle,
   Play,
   Rocket,
-  BarChart3,
   Send,
   X,
-  Handshake,
   Instagram,
   Lock,
   Globe,
@@ -58,6 +56,7 @@ export default function InvestiLandingPage() {
   const [age, setAge] = useState("")
   const [selectedGoals, setSelectedGoals] = useState<string[]>([])
   const [selectedInterests, setSelectedInterests] = useState<string[]>([])
+  const [acceptTerms, setAcceptTerms] = useState(false)
   const [message, setMessage] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
 
@@ -230,8 +229,27 @@ export default function InvestiLandingPage() {
     setIsSubmitting(true)
     setMessage("")
 
+    if (!acceptTerms) {
+      setMessage("Por favor, acepta los términos y condiciones para continuar.")
+      setIsSubmitting(false)
+      return
+    }
+
     // Simulate API call
     await new Promise((resolve) => setTimeout(resolve, 2000))
+
+    // Simulate sending email to sramirezku@gmail.com
+    const formData = {
+      name,
+      email,
+      phone,
+      age,
+      goals: selectedGoals,
+      interests: selectedInterests,
+      timestamp: new Date().toISOString(),
+    }
+
+    console.log("Enviando datos a sramirezku@gmail.com:", formData)
 
     setMessage(
       "🎉 ¡Increíble! Ya eres parte de la revolución financiera. Te contactaremos en las próximas 24-48 horas con tu acceso beta exclusivo y todos los detalles para empezar tu viaje hacia la libertad financiera.",
@@ -242,6 +260,7 @@ export default function InvestiLandingPage() {
     setAge("")
     setSelectedGoals([])
     setSelectedInterests([])
+    setAcceptTerms(false)
     setIsSubmitting(false)
   }
 
@@ -268,70 +287,35 @@ export default function InvestiLandingPage() {
       hasBackground: false,
     },
     {
-      icon: () => (
-        <div
-          className="w-14 h-14 bg-blue-500 text-white flex items-center justify-center shadow-lg"
-          style={{ borderRadius: "1rem 1rem 1rem 0.3rem" }}
-        >
-          <Users className="h-7 w-7" />
-        </div>
-      ),
+      icon: () => <Image src="/feature-icon-1.png" alt="Comunidades de Aprendizaje" width={64} height={64} />,
       title: "Comunidades de Aprendizaje",
       description: "Conecta con personas que comparten tus metas de crecimiento financiero.",
       color: "bg-gradient-to-br from-green-500 to-blue-500",
       hasBackground: false,
     },
     {
-      icon: () => (
-        <div
-          className="w-14 h-14 bg-yellow-500 text-white flex items-center justify-center shadow-lg"
-          style={{ borderRadius: "1rem 1rem 1rem 0.3rem" }}
-        >
-          <GraduationCap className="h-7 w-7" />
-        </div>
-      ),
+      icon: () => <Image src="/feature-icon-2.png" alt="Educación Gamificada" width={64} height={64} />,
       title: "Educación Gamificada",
       description: "Aprende conceptos financieros de forma divertida con cursos interactivos y desafíos.",
       color: "bg-gradient-to-br from-yellow-500 to-orange-500",
       hasBackground: false,
     },
     {
-      icon: () => (
-        <div
-          className="w-14 h-14 bg-purple-500 text-white flex items-center justify-center shadow-lg"
-          style={{ borderRadius: "1rem 1rem 1rem 0.3rem" }}
-        >
-          <Rocket className="h-7 w-7" />
-        </div>
-      ),
+      icon: () => <Image src="/feature-icon-3.png" alt="Crecimiento Personal" width={64} height={64} />,
       title: "Crecimiento Personal",
       description: "Desarrolla habilidades financieras que transformarán tu relación con el dinero.",
       color: "bg-gradient-to-br from-purple-500 to-pink-500",
       hasBackground: false,
     },
     {
-      icon: () => (
-        <div
-          className="w-14 h-14 bg-pink-500 text-white flex items-center justify-center shadow-lg"
-          style={{ borderRadius: "1rem 1rem 1rem 0.3rem" }}
-        >
-          <Handshake className="h-7 w-7" />
-        </div>
-      ),
+      icon: () => <Image src="/feature-icon-4.png" alt="Red de Mentores" width={64} height={64} />,
       title: "Red de Mentores",
       description: "Accede a expertos en finanzas personales y educadores certificados.",
       color: "bg-gradient-to-br from-pink-500 to-red-500",
       hasBackground: false,
     },
     {
-      icon: () => (
-        <div
-          className="w-14 h-14 bg-indigo-500 text-white flex items-center justify-center shadow-lg"
-          style={{ borderRadius: "1rem 1rem 1rem 0.3rem" }}
-        >
-          <BarChart3 className="h-7 w-7" />
-        </div>
-      ),
+      icon: () => <Image src="/feature-icon-5.png" alt="Herramientas Educativas" width={64} height={64} />,
       title: "Herramientas Educativas",
       description: "Simuladores y calculadoras para practicar sin riesgo financiero real.",
       color: "bg-gradient-to-br from-indigo-500 to-blue-500",
@@ -462,7 +446,7 @@ export default function InvestiLandingPage() {
         <div className="w-full max-w-7xl flex items-center justify-between">
           <Link href="#" className="flex items-center gap-3">
             <Image
-              src="/investi-logo-main.png"
+              src="/investi-logo-new-main.png"
               alt="Investï - Plataforma de Educación Financiera"
               width={150}
               height={40}
@@ -568,16 +552,16 @@ export default function InvestiLandingPage() {
                 </div>
               </div>
 
-              <div className="relative flex justify-center">
+              <div className="relative flex justify-center lg:justify-center">
                 {/* Wrapper que se ajusta al video y evita bordes blancos */}
-                <div className="inline-block overflow-hidden rounded-2xl shadow-2xl -mt-12">
+                <div className="inline-block overflow-hidden rounded-2xl shadow-2xl -mt-16">
                   <video
                     autoPlay
                     muted
                     loop
                     playsInline
-                    // El video define su propio tamaño
-                    className="block h-auto max-h-[450px] w-auto max-w-full"
+                    // El video define su propio tamaño - más alto y proporcional
+                    className="block h-auto max-h-[550px] w-auto max-w-full"
                   >
                     <source src="https://socialmediamkt.softwarenicaragua.com/wp-content/uploads/2025/08/WhatsApp-Video-2025-08-13-at-19.40.19.mp4" type="video/mp4" />
                     Tu navegador no soporta el elemento de video.
@@ -898,7 +882,7 @@ export default function InvestiLandingPage() {
               </div>
             </div>
 
-            <Card className="max-w-2xl mx-auto p-8 bg-white/95 backdrop-blur-sm text-gray-900 shadow-2xl">
+            <Card className="max-w-3xl mx-auto p-8 bg-white/95 backdrop-blur-sm text-gray-900 shadow-2xl">
               <CardHeader className="text-center pb-6">
                 <CardTitle className="text-3xl font-bold mb-2">Registro Beta Exclusivo</CardTitle>
                 <CardDescription className="text-lg text-gray-600">
@@ -906,81 +890,93 @@ export default function InvestiLandingPage() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid md:grid-cols-3 gap-4">
-                    <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                        Nombre Completo *
-                      </label>
-                      <Input
-                        id="name"
-                        type="text"
-                        placeholder="Tu nombre completo"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        required
-                        className="h-12 text-base"
-                      />
+                <form onSubmit={handleSubmit} className="space-y-8">
+                  {/* Personal Information */}
+                  <div className="bg-gray-50 p-6 rounded-xl space-y-6">
+                    <h3 className="text-xl font-semibold text-gray-900 mb-4">Información Personal</h3>
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <div>
+                        <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                          Nombre Completo *
+                        </label>
+                        <Input
+                          id="name"
+                          type="text"
+                          placeholder="Tu nombre completo"
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
+                          required
+                          className="h-12 text-base"
+                        />
+                      </div>
+                      <div>
+                        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                          Correo Electrónico *
+                        </label>
+                        <Input
+                          id="email"
+                          type="email"
+                          placeholder="tu@email.com"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          required
+                          className="h-12 text-base"
+                        />
+                      </div>
                     </div>
-                    <div>
-                      <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
-                        Teléfono
-                      </label>
-                      <Input
-                        id="phone"
-                        type="tel"
-                        placeholder="+56 9 1234 5678"
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
-                        className="h-12 text-base"
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="age" className="block text-sm font-medium text-gray-700 mb-2">
-                        Edad *
-                      </label>
-                      <Select onValueChange={setAge} value={age} required>
-                        <SelectTrigger className="h-12 text-base">
-                          <SelectValue placeholder="Selecciona tu edad" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="18-25">18-25 años</SelectItem>
-                          <SelectItem value="26-35">26-35 años</SelectItem>
-                          <SelectItem value="36-45">36-45 años</SelectItem>
-                          <SelectItem value="46-55">46-55 años</SelectItem>
-                          <SelectItem value="56-65">56-65 años</SelectItem>
-                          <SelectItem value="65+">65+ años</SelectItem>
-                        </SelectContent>
-                      </Select>
+
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <div>
+                        <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+                          Teléfono (Opcional)
+                        </label>
+                        <Input
+                          id="phone"
+                          type="tel"
+                          placeholder="+56 9 1234 5678"
+                          value={phone}
+                          onChange={(e) => setPhone(e.target.value)}
+                          className="h-12 text-base"
+                        />
+                      </div>
+                      <div>
+                        <label htmlFor="age" className="block text-sm font-medium text-gray-700 mb-2">
+                          Rango de Edad *
+                        </label>
+                        <Select onValueChange={setAge} value={age} required>
+                          <SelectTrigger className="h-12 text-base">
+                            <SelectValue placeholder="Selecciona tu edad" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="18-25">18-25 años</SelectItem>
+                            <SelectItem value="26-35">26-35 años</SelectItem>
+                            <SelectItem value="36-45">36-45 años</SelectItem>
+                            <SelectItem value="46-55">46-55 años</SelectItem>
+                            <SelectItem value="56-65">56-65 años</SelectItem>
+                            <SelectItem value="65+">65+ años</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
                     </div>
                   </div>
 
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                      Correo Electrónico *
-                    </label>
-                    <Input
-                      id="email"
-                      type="email"
-                      placeholder="tu@email.com"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      required
-                      className="h-12 text-base"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                  {/* Goals Section */}
+                  <div className="bg-blue-50 p-6 rounded-xl space-y-4">
+                    <h3 className="text-xl font-semibold text-gray-900 mb-4">Tus Objetivos Financieros</h3>
+                    <label className="block text-sm font-medium text-gray-700 mb-3">
                       ¿Qué esperas lograr con Investï? (Puedes seleccionar varios) *
                     </label>
-                    <div className="grid grid-cols-2 gap-2">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                       {userGoals.map((goal) => (
                         <Button
                           key={goal}
                           type="button"
                           variant={selectedGoals.includes(goal) ? "default" : "outline"}
-                          className={`h-auto py-2 px-3 text-sm ${selectedGoals.includes(goal) ? "bg-blue-600 text-white" : "border-gray-300 text-gray-700 hover:bg-gray-100"}`}
+                          className={`h-auto py-3 px-4 text-sm font-medium transition-all duration-200 ${
+                            selectedGoals.includes(goal)
+                              ? "bg-blue-600 text-white shadow-md transform scale-105"
+                              : "border-gray-300 text-gray-700 hover:bg-blue-50 hover:border-blue-300"
+                          }`}
                           onClick={() => handleGoalChange(goal)}
                         >
                           {goal}
@@ -988,21 +984,30 @@ export default function InvestiLandingPage() {
                       ))}
                     </div>
                     {selectedGoals.length === 0 && (
-                      <p className="text-red-500 text-xs mt-1">Por favor, selecciona al menos una meta.</p>
+                      <p className="text-red-500 text-sm mt-2 flex items-center gap-2">
+                        <span className="w-2 h-2 bg-red-500 rounded-full"></span>
+                        Por favor, selecciona al menos una meta.
+                      </p>
                     )}
                   </div>
 
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                  {/* Interests Section */}
+                  <div className="bg-green-50 p-6 rounded-xl space-y-4">
+                    <h3 className="text-xl font-semibold text-gray-900 mb-4">Tus Intereses de Aprendizaje</h3>
+                    <label className="block text-sm font-medium text-gray-700 mb-3">
                       ¿Qué te gustaría aprender o en qué te interesa invertir? (Puedes seleccionar varios) *
                     </label>
-                    <div className="grid grid-cols-2 gap-2">
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                       {learningInterests.map((interest) => (
                         <Button
                           key={interest}
                           type="button"
                           variant={selectedInterests.includes(interest) ? "default" : "outline"}
-                          className={`h-auto py-2 px-3 text-sm ${selectedInterests.includes(interest) ? "bg-blue-600 text-white" : "border-gray-300 text-gray-700 hover:bg-gray-100"}`}
+                          className={`h-auto py-3 px-4 text-sm font-medium transition-all duration-200 ${
+                            selectedInterests.includes(interest)
+                              ? "bg-green-600 text-white shadow-md transform scale-105"
+                              : "border-gray-300 text-gray-700 hover:bg-green-50 hover:border-green-300"
+                          }`}
                           onClick={() => handleInterestChange(interest)}
                         >
                           {interest}
@@ -1010,23 +1015,68 @@ export default function InvestiLandingPage() {
                       ))}
                     </div>
                     {selectedInterests.length === 0 && (
-                      <p className="text-red-500 text-xs mt-1">Por favor, selecciona al menos un interés.</p>
+                      <p className="text-red-500 text-sm mt-2 flex items-center gap-2">
+                        <span className="w-2 h-2 bg-red-500 rounded-full"></span>
+                        Por favor, selecciona al menos un interés.
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Terms and Conditions */}
+                  <div className="bg-gray-50 p-6 rounded-xl">
+                    <div className="flex items-start space-x-3">
+                      <Checkbox
+                        id="terms"
+                        checked={acceptTerms}
+                        onCheckedChange={(checked) => setAcceptTerms(checked as boolean)}
+                        className="mt-1"
+                      />
+                      <div className="text-sm text-gray-700 leading-relaxed">
+                        <label htmlFor="terms" className="cursor-pointer">
+                          Acepto los{" "}
+                          <Link href="/terminos" className="text-blue-600 hover:underline font-medium" target="_blank">
+                            Términos y Condiciones
+                          </Link>{" "}
+                          y la{" "}
+                          <Link
+                            href="/privacidad"
+                            className="text-blue-600 hover:underline font-medium"
+                            target="_blank"
+                          >
+                            Política de Privacidad
+                          </Link>{" "}
+                          de Investï. Entiendo que mis datos serán utilizados para contactarme sobre el programa beta y
+                          que recibiré comunicaciones relacionadas con la plataforma. *
+                        </label>
+                      </div>
+                    </div>
+                    {!acceptTerms && (
+                      <p className="text-red-500 text-sm mt-2 ml-6 flex items-center gap-2">
+                        <span className="w-2 h-2 bg-red-500 rounded-full"></span>
+                        Debes aceptar los términos y condiciones para continuar.
+                      </p>
                     )}
                   </div>
 
                   <Button
                     type="submit"
-                    className="w-full h-14 text-lg bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white shadow-xl transition-all duration-300 transform hover:scale-105"
-                    disabled={isSubmitting || selectedGoals.length === 0 || selectedInterests.length === 0 || !age}
+                    className="w-full h-16 text-xl bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white shadow-xl transition-all duration-300 transform hover:scale-105 font-bold"
+                    disabled={
+                      isSubmitting ||
+                      selectedGoals.length === 0 ||
+                      selectedInterests.length === 0 ||
+                      !age ||
+                      !acceptTerms
+                    }
                   >
                     {isSubmitting ? (
                       <>
-                        <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-                        Procesando...
+                        <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white mr-3"></div>
+                        Procesando tu Registro...
                       </>
                     ) : (
                       <>
-                        <Rocket className="mr-2 h-5 w-5" />
+                        <Rocket className="mr-3 h-6 w-6" />
                         ¡Quiero Mi Acceso Beta ANTICIPADO!
                       </>
                     )}
@@ -1034,8 +1084,10 @@ export default function InvestiLandingPage() {
 
                   {message && (
                     <div
-                      className={`mt-4 p-4 rounded-lg text-center ${
-                        message.includes("Increíble") ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
+                      className={`mt-6 p-6 rounded-xl text-center text-lg font-medium ${
+                        message.includes("Increíble")
+                          ? "bg-green-100 text-green-800 border border-green-200"
+                          : "bg-red-100 text-red-800 border border-red-200"
                       }`}
                     >
                       {message}
@@ -1056,7 +1108,7 @@ export default function InvestiLandingPage() {
             <div className="md:col-span-2">
               <div className="flex items-center gap-3 mb-6">
                 <Image
-                  src="/investi-logo-main.png"
+                  src="/investi-logo-new-main.png"
                   alt="Investï Community"
                   width={150}
                   height={40}
@@ -1182,9 +1234,9 @@ export default function InvestiLandingPage() {
       {/* AI Chat Widget */}
       {isChatOpen && (
         <div className="fixed bottom-4 right-4 w-96 h-[600px] bg-white rounded-2xl shadow-2xl border z-50 flex flex-col">
-          <div className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white p-4 rounded-t-2xl flex items-center justify-between">
+          <div className="bg-white text-gray-900 p-4 rounded-t-2xl flex items-center justify-between border-b">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+              <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center">
                 <Image
                   src="https://socialmediamkt.softwarenicaragua.com/wp-content/uploads/2025/08/iri-icono-Sin-fondo.gif"
                   alt="Irï Icon"
@@ -1194,9 +1246,9 @@ export default function InvestiLandingPage() {
                 />
               </div>
               <div>
-                <h3 className="font-semibold">Irï - Tu Mentor IA</h3>
-                <p className="text-xs opacity-90 flex items-center gap-1">
-                  <div className="w-2 h-2 bg-green-300 rounded-full animate-pulse"></div>
+                <h3 className="font-semibold text-gray-900">Irï - Tu Mentor IA</h3>
+                <p className="text-xs text-gray-600 flex items-center gap-1">
+                  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
                   En línea
                 </p>
               </div>
@@ -1204,7 +1256,7 @@ export default function InvestiLandingPage() {
             <Button
               size="sm"
               variant="ghost"
-              className="text-white hover:bg-white/20"
+              className="text-gray-600 hover:bg-gray-100"
               onClick={() => setIsChatOpen(false)}
             >
               <X className="h-4 w-4" />
