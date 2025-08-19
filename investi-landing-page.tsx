@@ -276,8 +276,8 @@ export default function InvestiLandingPage() {
         <Image
           src="https://socialmediamkt.softwarenicaragua.com/wp-content/uploads/2025/08/iri-icono-Sin-fondo.gif"
           alt="Irï Icon"
-          width={69}
-          height={69}
+          width={74}
+          height={74}
           unoptimized
         />
       ),
@@ -288,7 +288,12 @@ export default function InvestiLandingPage() {
     },
     {
       icon: () => (
-        <Image src="/placeholder.svg?height=64&width=64" alt="Comunidades de Aprendizaje" width={64} height={64} />
+        <Image
+          src="https://socialmediamkt.softwarenicaragua.com/wp-content/uploads/2025/08/3.png"
+          alt="Comunidades de Aprendizaje"
+          width={64}
+          height={64}
+        />
       ),
       title: "Comunidades de Aprendizaje",
       description: "Conecta con personas que comparten tus metas de crecimiento financiero.",
@@ -312,7 +317,7 @@ export default function InvestiLandingPage() {
     {
       icon: () => (
         <Image
-          src="https://socialmediamkt.softwarenicaragua.com/wp-content/uploads/2025/08/Logo-y-camisetas-1.png"
+          src="https://socialmediamkt.softwarenicaragua.com/wp-content/uploads/2025/08/Logo-y-camisetas-2.png"
           alt="Red de Mentores"
           width={64}
           height={64}
@@ -562,9 +567,9 @@ export default function InvestiLandingPage() {
                 </div>
               </div>
 
-              <div className="relative flex justify-center lg:justify-center">
-                <div className="inline-block overflow-hidden rounded-2xl shadow-2xl -mt-20">
-                  <video autoPlay muted loop playsInline className="block h-auto max-h-[550px] w-auto max-w-full">
+              <div className="lg:w-1/2 flex justify-center lg:justify-end">
+                <div className="relative max-w-lg w-full">
+                  <video autoPlay muted loop playsInline className="block h-auto max-h-[550px] w-auto max-w-full -mt-8">
                     <source
                       src="https://socialmediamkt.softwarenicaragua.com/wp-content/uploads/2025/08/investi-motion_-1.mp4"
                       type="video/mp4"
@@ -1004,13 +1009,13 @@ export default function InvestiLandingPage() {
                     <label className="block text-sm font-medium text-gray-700 mb-3">
                       ¿Qué te gustaría aprender o en qué te interesa invertir? (Puedes seleccionar varios) *
                     </label>
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                       {learningInterests.map((interest) => (
                         <Button
                           key={interest}
                           type="button"
                           variant={selectedInterests.includes(interest) ? "default" : "outline"}
-                          className={`h-auto py-3 px-4 text-sm font-medium transition-all duration-200 ${
+                          className={`h-auto py-3 px-3 text-xs font-medium transition-all duration-200 text-center whitespace-normal leading-tight ${
                             selectedInterests.includes(interest)
                               ? "bg-green-600 text-white shadow-md transform scale-105"
                               : "border-gray-300 text-gray-700 hover:bg-green-50 hover:border-green-300"
@@ -1115,7 +1120,7 @@ export default function InvestiLandingPage() {
             <div className="md:col-span-2">
               <div className="flex items-center gap-3 mb-6">
                 <Image
-                  src="/investi-logo-new-main.png"
+                  src="https://socialmediamkt.softwarenicaragua.com/wp-content/uploads/2025/08/logo-investi-blanco.png"
                   alt="Investï Community"
                   width={150}
                   height={40}
@@ -1219,7 +1224,7 @@ export default function InvestiLandingPage() {
           <div className="border-t border-gray-700 pt-8">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
               <p className="text-gray-400">
-                &copy; {new Date().getFullYear()} Investï Community. Todos los derechos reservados.
+                &copy; {new Date().getFullYear()} Investï SpA. Todos los derechos reservados.
               </p>
               <div className="flex items-center gap-4">
                 <Badge variant="outline" className="border-blue-500 text-blue-400">
@@ -1353,14 +1358,14 @@ export default function InvestiLandingPage() {
       {/* Floating Chat Button */}
       {!isChatOpen && (
         <button
-          className="fixed bottom-6 right-6 w-16 h-16 rounded-full shadow-2xl z-40 animate-pulse flex items-center justify-center bg-transparent"
+          className="fixed bottom-6 right-6 w-20 h-20 rounded-full shadow-2xl z-40 animate-pulse flex items-center justify-center bg-transparent"
           onClick={() => setIsChatOpen(true)}
         >
           <Image
             src="https://socialmediamkt.softwarenicaragua.com/wp-content/uploads/2025/08/iri-icono-Sin-fondo.gif"
             alt="Chat with Irï"
-            width={64}
-            height={64}
+            width={80}
+            height={80}
             unoptimized
             className="rounded-full"
           />
