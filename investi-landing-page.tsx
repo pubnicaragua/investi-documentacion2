@@ -276,8 +276,8 @@ export default function InvestiLandingPage() {
         <Image
           src="https://socialmediamkt.softwarenicaragua.com/wp-content/uploads/2025/08/iri-icono-Sin-fondo.gif"
           alt="Irï Icon"
-          width={64}
-          height={64}
+          width={69}
+          height={69}
           unoptimized
         />
       ),
@@ -287,7 +287,9 @@ export default function InvestiLandingPage() {
       hasBackground: false,
     },
     {
-      icon: () => <Image src="/feature-icon-1.png" alt="Comunidades de Aprendizaje" width={64} height={64} />,
+      icon: () => (
+        <Image src="/placeholder.svg?height=64&width=64" alt="Comunidades de Aprendizaje" width={64} height={64} />
+      ),
       title: "Comunidades de Aprendizaje",
       description: "Conecta con personas que comparten tus metas de crecimiento financiero.",
       color: "bg-gradient-to-br from-green-500 to-blue-500",
@@ -308,7 +310,14 @@ export default function InvestiLandingPage() {
       hasBackground: false,
     },
     {
-      icon: () => <Image src="/feature-icon-4.png" alt="Red de Mentores" width={64} height={64} />,
+      icon: () => (
+        <Image
+          src="https://socialmediamkt.softwarenicaragua.com/wp-content/uploads/2025/08/Logo-y-camisetas-1.png"
+          alt="Red de Mentores"
+          width={64}
+          height={64}
+        />
+      ),
       title: "Red de Mentores",
       description: "Accede a expertos en finanzas personales y educadores certificados.",
       color: "bg-gradient-to-br from-pink-500 to-red-500",
@@ -514,7 +523,8 @@ export default function InvestiLandingPage() {
                     </span>
                   </h1>
                   <p className="text-xl md:text-2xl text-gray-600 leading-relaxed">
-                    La primera plataforma de educación financiera potenciada con IA.
+                    La primera <span className="font-bold text-blue-600">red social</span> de{" "}
+                    <span className="font-bold text-blue-600">educación financiera</span> potenciada con IA.
                     <span className="font-semibold text-blue-600"> Aprende, conecta y crece</span> junto a miles de
                     personas que buscan mejorar su futuro financiero.
                   </p>
@@ -526,7 +536,7 @@ export default function InvestiLandingPage() {
                     className="h-14 px-8 text-lg bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white shadow-xl transition-all duration-300 transform hover:scale-105"
                     onClick={() => scrollToSection("register")}
                   >
-                    Únete a la primera red social de educación financiera
+                    Únete a la red social de educación financiera
                   </Button>
                   <Button
                     variant="outline"
@@ -553,17 +563,12 @@ export default function InvestiLandingPage() {
               </div>
 
               <div className="relative flex justify-center lg:justify-center">
-                {/* Wrapper que se ajusta al video y evita bordes blancos */}
-                <div className="inline-block overflow-hidden rounded-2xl shadow-2xl -mt-16">
-                  <video
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    // El video define su propio tamaño - más alto y proporcional
-                    className="block h-auto max-h-[550px] w-auto max-w-full"
-                  >
-                    <source src="https://socialmediamkt.softwarenicaragua.com/wp-content/uploads/2025/08/WhatsApp-Video-2025-08-13-at-19.40.19.mp4" type="video/mp4" />
+                <div className="inline-block overflow-hidden rounded-2xl shadow-2xl -mt-20">
+                  <video autoPlay muted loop playsInline className="block h-auto max-h-[550px] w-auto max-w-full">
+                    <source
+                      src="https://socialmediamkt.softwarenicaragua.com/wp-content/uploads/2025/08/investi-motion_-1.mp4"
+                      type="video/mp4"
+                    />
                     Tu navegador no soporta el elemento de video.
                   </video>
                 </div>
@@ -581,7 +586,9 @@ export default function InvestiLandingPage() {
                 Una Plataforma <span className="text-blue-600">Revolucionaria</span>
               </h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Combinamos inteligencia artificial, gamificación y comunidad para crear la experiencia de aprendizaje
+                Combinamos <span className="font-bold text-blue-600">inteligencia artificial</span>,{" "}
+                <span className="font-bold text-blue-600">gamificación</span> y{" "}
+                <span className="font-bold text-blue-600">comunidad</span> para crear la experiencia de aprendizaje
                 financiero más avanzada del mundo.
               </p>
             </div>
@@ -788,7 +795,7 @@ export default function InvestiLandingPage() {
             <div className="text-center mb-16">
               <Badge className="bg-indigo-100 text-indigo-700 px-4 py-2 text-sm font-medium mb-4">🗺️ Roadmap</Badge>
               <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6">
-                El <span className="text-indigo-600">Futuro</span> de Investï: Tu Camino al Éxito
+                El <span className="text-indigo-600">Futuro</span> de Investï: Tu Camino a la Educación Financiera
               </h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                 Conoce nuestros planes y únete desde el principio para ser parte de esta revolución financiera.
@@ -1090,7 +1097,7 @@ export default function InvestiLandingPage() {
                           : "bg-red-100 text-red-800 border border-red-200"
                       }`}
                     >
-                      {message}
+                      {message.replace("libertad financiera", "educación financiera")}
                     </div>
                   )}
                 </form>
@@ -1346,14 +1353,14 @@ export default function InvestiLandingPage() {
       {/* Floating Chat Button */}
       {!isChatOpen && (
         <button
-          className="fixed bottom-6 right-6 w-16 h-16 rounded-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 shadow-2xl z-40 animate-pulse flex items-center justify-center"
+          className="fixed bottom-6 right-6 w-16 h-16 rounded-full shadow-2xl z-40 animate-pulse flex items-center justify-center bg-transparent"
           onClick={() => setIsChatOpen(true)}
         >
           <Image
             src="https://socialmediamkt.softwarenicaragua.com/wp-content/uploads/2025/08/iri-icono-Sin-fondo.gif"
             alt="Chat with Irï"
-            width={40}
-            height={40}
+            width={64}
+            height={64}
             unoptimized
             className="rounded-full"
           />
