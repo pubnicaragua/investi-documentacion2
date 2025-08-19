@@ -1,0 +1,138 @@
+{
+  "welcome": {
+    "title": "¡Únete a Investí Community!",
+    "subtitle": "La primera red social de educación financiera",
+    "getStarted": "Empezar",
+    "signIn": "Ya tengo una cuenta"
+  },
+  "auth": {
+    "signIn": "Iniciar sesión",
+    "signUp": "Registrarse",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "name": "Nombre completo",
+    "username": "Nombre de usuario",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "createAccount": "Crear cuenta",
+    "alreadyHaveAccount": "¿Ya tienes cuenta? Inicia sesión",
+    "completeAllFields": "Por favor completa todos los campos",
+    "signInWith": "Inicia sesión con",
+    "signUpWith": "Regístrate con",
+    "linkedin": "LinkedIn",
+    "google": "Google",
+    "apple": "Apple",
+    "facebook": "Facebook",
+    "terms": "Al registrarte en Investí, tu aceptas nuestros Términos y Políticas de Privacidad"
+  },
+  "avatar": {
+    "title": "Sube tu foto de perfil",
+    "skip": "Omitir",
+    "continue": "Guardar foto y continuar",
+    "changePhoto": "Cambiar foto de perfil",
+    "subtitle": "Sube una foto de perfil para que puedan reconocerte fácilmente"
+  },
+  "goals": {
+    "title": "¿Cuáles son tus metas al invertir?",
+    "subtitle": "Puedes elegir a menos una y máximo 3 por orden de prioridad",
+    "continue": "Continuar"
+  },
+  "interests": {
+    "title": "¿Cuáles son tus intereses?",
+    "subtitle": "Selecciona al menos 3 temas para comenzar",
+    "continue": "Continuar"
+  },
+  "knowledge": {
+    "title": "¿Cuál es tu nivel de conocimientos financieros?",
+    "continue": "Continuar",
+    "noKnowledge": "No tengo conocimiento",
+    "littleKnowledge": "Tengo un poco de conocimiento",
+    "someKnowledge": "Tengo conocimiento",
+    "expert": "Soy experto"
+  },
+  "communities": {
+    "title": "Comunidades recomendadas",
+    "subtitle": "Aquí tienes comunidades recomendadas según tus intereses",
+    "join": "Unirse",
+    "finish": "Finalizar",
+    "members": "miembros",
+    "publicCommunity": "Comunidad pública",
+    "privateCommunity": "Comunidad privada",
+    "joined": "Unido",
+    "noCommunitiesAvailable": "No hay comunidades disponibles"
+  },
+  "feed": {
+    "title": "Para ti",
+    "following": "Siguiendo",
+    "popular": "Popular",
+    "connect": "Conectar",
+    "suggestions": "Personas que quizá conoces del grupo de inversiones para principiantes",
+    "loadingFeed": "Cargando feed...",
+    "noPostsAvailable": "No hay publicaciones disponibles"
+  },
+  "createPost": {
+    "title": "Compartir publicación",
+    "publish": "Publicar",
+    "publishing": "Publicando...",
+    "placeholder": "¿Qué estás pensando?",
+    "community": "Comunidad",
+    "addPhoto": "Agregar una foto",
+    "addVideo": "Agregar un video",
+    "celebrate": "Celebrar un momento",
+    "addDocument": "Agregar un documento",
+    "findPartner": "Busca algún socio",
+    "createPoll": "Crea una encuesta"
+  },
+  "postDetail": {
+    "title": "Publicación",
+    "comments": "Comentarios",
+    "writeComment": "Escribe un comentario...",
+    "send": "Enviar",
+    "loadingPost": "Cargando publicación...",
+    "postNotFound": "Publicación no encontrada",
+    "postNotFoundMessage": "La publicación que buscas no existe o fue eliminada"
+  },
+  "profile": {
+    "title": "Perfil",
+    "goToProfile": "Ir a mi perfil",
+    "quickAccess": "Tus accesos rápidos",
+    "edit": "Editar",
+    "savedPosts": "Publicaciones guardadas",
+    "communities": "Comunidades",
+    "consultIri": "Consulta a Iri",
+    "configuration": "Configuración",
+    "loadingProfile": "Cargando perfil..."
+  },
+  "settings": {
+    "title": "Ajustes",
+    "language": "Idioma",
+    "loginSecurity": "Inicio de sesión y seguridad",
+    "dataPrivacy": "Privacidad de datos",
+    "notifications": "Notificaciones",
+    "angelInvestor": "Inversionista Ángel",
+    "startups": "Startups / Emprendimientos",
+    "helpCenter": "Centro de ayuda",
+    "privacyPolicy": "Política de privacidad",
+    "accessibility": "Accesibilidad",
+    "recommendationsTransparency": "Transparencia de las recomendaciones",
+    "userLicense": "Contrato de licencia para el usuario final",
+    "signOut": "Cerrar sesión",
+    "signOutConfirmTitle": "Cerrar sesión",
+    "signOutConfirmMessage": "¿Estás seguro que quieres cerrar sesión?",
+    "cancel": "Cancelar",
+    "version": "VERSIÓN: 1.0.45.42"
+  },
+  "market": {
+    "title": "Información de la bolsa",
+    "search": "Buscar",
+    "relevantUpdates": "Actualizaciones relevantes",
+    "seeAll": "Ver todo",
+    "currentMarket": "Mercado actual"
+  },
+  "common": {
+    "error": "Error",
+    "retry": "Reintentar",
+    "loading": "Cargando...",
+    "noData": "No hay datos disponibles",
+    "back": "Atrás"
+  }
+}

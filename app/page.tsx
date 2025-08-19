@@ -1,5 +1,7 @@
-import InvestiLandingPage from "../investi-landing-page"
+"use client"
 
-export default function Page() {
-  return <InvestiLandingPage />
+import { HomeFeedScreen } from "../src/screens/HomeFeedScreen"
+
+export default function SyntheticV0PageForDeployment() {
+  return <HomeFeedScreen />
 }
