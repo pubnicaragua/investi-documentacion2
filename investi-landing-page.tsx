@@ -569,7 +569,13 @@ export default function InvestiLandingPage() {
 
               <div className="lg:w-1/2 flex justify-center lg:justify-end">
                 <div className="relative max-w-lg w-full">
-                  <video autoPlay muted loop playsInline className="block h-auto max-h-[550px] w-auto max-w-full -mt-8">
+                  <video
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="block h-auto max-h-[550px] w-auto max-w-full -mt-16 mr-4"
+                  >
                     <source
                       src="https://socialmediamkt.softwarenicaragua.com/wp-content/uploads/2025/08/investi-motion_-1.mp4"
                       type="video/mp4"
@@ -1248,7 +1254,7 @@ export default function InvestiLandingPage() {
         <div className="fixed bottom-4 right-4 w-96 h-[600px] bg-white rounded-2xl shadow-2xl border z-50 flex flex-col">
           <div className="bg-white text-gray-900 p-4 rounded-t-2xl flex items-center justify-between border-b">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center">
+              <div className="w-10 h-10 flex items-center justify-center">
                 <Image
                   src="https://socialmediamkt.softwarenicaragua.com/wp-content/uploads/2025/08/iri-icono-Sin-fondo.gif"
                   alt="Irï Icon"
