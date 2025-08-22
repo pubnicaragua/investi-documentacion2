@@ -574,7 +574,7 @@ export default function InvestiLandingPage() {
                     muted
                     loop
                     playsInline
-                    className="block h-auto max-h-[550px] w-auto max-w-full -mt-28 mr-12"
+                    className="block h-auto max-h-[550px] w-auto max-w-full -mt-28 mr-20"
                   >
                     <source
                       src="https://socialmediamkt.softwarenicaragua.com/wp-content/uploads/2025/08/investi-motion_-1.mp4"
