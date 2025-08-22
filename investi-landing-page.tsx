@@ -508,85 +508,86 @@ export default function InvestiLandingPage() {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative w-full py-20 md:py-32 lg:py-40 bg-gradient-to-br from-blue-50 via-white to-blue-50 overflow-hidden">
-          <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
-          <div className="w-full max-w-7xl mx-auto px-4 md:px-6 relative z-10">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div className="flex flex-col space-y-8 text-center lg:text-left max-w-2xl mx-auto lg:mx-0">
-                <div className="space-y-4">
-                  <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight leading-none">
-                    <span className="bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
-                      Conecta
-                    </span>{" "}
-                    <span className="text-gray-900">con tu </span>
-                    <span className="bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">
-                      Futuro
-                    </span>
-                    <br />
-                    <span className="bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">
-                      Financiero
-                    </span>
-                  </h1>
-                  <p className="text-xl md:text-2xl text-gray-600 leading-relaxed">
-                    La primera <span className="font-bold text-blue-600">red social</span> de{" "}
-                    <span className="font-bold text-blue-600">educación financiera</span> potenciada con IA.
-                    <span className="font-semibold text-blue-600"> Aprende, conecta y crece</span> junto a miles de
-                    personas que buscan mejorar su futuro financiero.
-                  </p>
-                </div>
+       <section className="relative w-full py-20 md:py-32 lg:py-40 bg-gradient-to-br from-blue-50 via-white to-blue-50 overflow-hidden">
+  <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
+  <div className="w-full max-w-7xl mx-auto px-4 md:px-6 relative z-10">
+    <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <div className="flex flex-col space-y-8 text-center lg:text-left max-w-2xl mx-auto lg:mx-0">
+        <div className="space-y-4">
+          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight leading-none">
+            <span className="bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
+              Conecta
+            </span>{" "}
+            <span className="text-gray-900">con tu </span>
+            <span className="bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">
+              Futuro
+            </span>
+            <br />
+            <span className="bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">
+              Financiero
+            </span>
+          </h1>
+          <p className="text-xl md:text-2xl text-gray-600 leading-relaxed">
+            La primera <span className="font-bold text-blue-600">red social</span> de{" "}
+            <span className="font-bold text-blue-600">educación financiera</span> potenciada con IA.
+            <span className="font-semibold text-blue-600"> Aprende, conecta y crece</span> junto a miles de
+            personas que buscan mejorar su futuro financiero.
+          </p>
+        </div>
 
-                <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                  <Button
-                    size="lg"
-                    className="h-14 px-8 text-lg bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white shadow-xl transition-all duration-300 transform hover:scale-105"
-                    onClick={() => scrollToSection("register")}
-                  >
-                    Únete a la red social de educación financiera
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    className="h-14 px-8 text-lg border-2 border-blue-600 text-blue-600 hover:bg-blue-50 transition-all duration-300 transform hover:scale-105 bg-transparent"
-                    onClick={() => scrollToSection("features")}
-                  >
-                    <Play className="mr-2 h-5 w-5" />
-                    Ver Demo
-                  </Button>
-                </div>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+          <Button
+            size="lg"
+            className="h-14 px-8 text-lg bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white shadow-xl transition-all duration-300 transform hover:scale-105"
+            onClick={() => scrollToSection("register")}
+          >
+            Únete a la red social de educación financiera
+          </Button>
+          <Button
+            variant="outline"
+            size="lg"
+            className="h-14 px-8 text-lg border-2 border-blue-600 text-blue-600 hover:bg-blue-50 transition-all duration-300 transform hover:scale-105 bg-transparent"
+            onClick={() => scrollToSection("features")}
+          >
+            <Play className="mr-2 h-5 w-5" />
+            Ver Demo
+          </Button>
+        </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-8">
-                  {stats.map((stat, index) => (
-                    <div key={index} className="text-center">
-                      <div className="flex justify-center mb-2">
-                        <stat.icon className="h-8 w-8 text-blue-600" />
-                      </div>
-                      <div className="text-2xl md:text-3xl font-bold text-gray-900">{stat.number}</div>
-                      <div className="text-sm text-gray-600">{stat.label}</div>
-                    </div>
-                  ))}
-                </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-8">
+          {stats.map((stat, index) => (
+            <div key={index} className="text-center">
+              <div className="flex justify-center mb-2">
+                <stat.icon className="h-8 w-8 text-blue-600" />
               </div>
-
-              <div className="lg:w-1/2 flex justify-center lg:justify-end">
-                <div className="relative max-w-lg w-full">
-                  <video
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    className="block h-auto max-h-[550px] w-auto max-w-full -mt-24"
-                  >
-                    <source
-                      src="https://socialmediamkt.softwarenicaragua.com/wp-content/uploads/2025/08/investi-motion_-1.mp4"
-                      type="video/mp4"
-                    />
-                    Tu navegador no soporta el elemento de video.
-                  </video>
-                </div>
-              </div>
+              <div className="text-2xl md:text-3xl font-bold text-gray-900">{stat.number}</div>
+              <div className="text-sm text-gray-600">{stat.label}</div>
             </div>
-          </div>
-        </section>
+          ))}
+        </div>
+      </div>
+
+      <div className="lg:w-1/2 flex justify-center lg:justify-end pr-8">
+        <div className="relative max-w-lg w-full translate-y-[-40px]">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="block h-auto max-h-[550px] w-auto max-w-full"
+          >
+            <source
+              src="https://socialmediamkt.softwarenicaragua.com/wp-content/uploads/2025/08/investi-motion_-1.mp4"
+              type="video/mp4"
+            />
+            Tu navegador no soporta el elemento de video.
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
         {/* Features Section */}
         <section id="features" className="w-full py-20 md:py-32 bg-gray-50">
