@@ -574,7 +574,7 @@ export default function InvestiLandingPage() {
                     muted
                     loop
                     playsInline
-                    className="block h-auto max-h-[550px] w-auto max-w-full -mt-16 mr-4"
+                    className="block h-auto max-h-[550px] w-auto max-w-full -mt-24 mr-8"
                   >
                     <source
                       src="https://socialmediamkt.softwarenicaragua.com/wp-content/uploads/2025/08/investi-motion_-1.mp4"
@@ -1364,7 +1364,7 @@ export default function InvestiLandingPage() {
       {/* Floating Chat Button */}
       {!isChatOpen && (
         <button
-          className="fixed bottom-6 right-6 w-20 h-20 rounded-full shadow-2xl z-40 animate-pulse flex items-center justify-center bg-transparent"
+          className="fixed bottom-6 right-6 w-20 h-20 z-40 animate-pulse flex items-center justify-center bg-transparent"
           onClick={() => setIsChatOpen(true)}
         >
           <Image
@@ -1373,7 +1373,7 @@ export default function InvestiLandingPage() {
             width={80}
             height={80}
             unoptimized
-            className="rounded-full"
+            className=""
           />
         </button>
       )}
