@@ -235,32 +235,42 @@ export default function InvestiLandingPage() {
       return
     }
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 2000))
+    try {
+      const formData = {
+        name,
+        email,
+        phone,
+        age,
+        goals: selectedGoals,
+        interests: selectedInterests,
+        timestamp: new Date().toISOString(),
+      }
 
-    // Simulate sending email to sramirezku@gmail.com
-    const formData = {
-      name,
-      email,
-      phone,
-      age,
-      goals: selectedGoals,
-      interests: selectedInterests,
-      timestamp: new Date().toISOString(),
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+
+      if (response.ok) {
+        setMessage("¡Gracias! Tu solicitud ha sido enviada exitosamente. Te contactaremos pronto.")
+        // Reset form
+        setName("")
+        setEmail("")
+        setPhone("")
+        setAge("")
+        setSelectedGoals([])
+        setSelectedInterests([])
+        setAcceptTerms(false)
+      } else {
+        throw new Error("Error al enviar el formulario")
+      }
+    } catch (error) {
+      setMessage("Hubo un error al enviar tu solicitud. Por favor, inténtalo de nuevo.")
     }
 
-    console.log("Enviando datos a sramirezku@gmail.com:", formData)
-
-    setMessage(
-      "🎉 ¡Increíble! Ya eres parte de la revolución financiera. Te contactaremos en las próximas 24-48 horas con tu acceso beta exclusivo y todos los detalles para empezar tu viaje hacia la libertad financiera.",
-    )
-    setEmail("")
-    setName("")
-    setPhone("")
-    setAge("")
-    setSelectedGoals([])
-    setSelectedInterests([])
-    setAcceptTerms(false)
     setIsSubmitting(false)
   }
 
@@ -567,8 +577,8 @@ export default function InvestiLandingPage() {
                 </div>
               </div>
 
-              <div className="lg:w-1/2 flex justify-center lg:justify-end pr-4">
-                <div className="relative max-w-lg w-full translate-y-[-80px]">
+              <div className="lg:w-1/2 flex justify-center lg:justify-end">
+                <div className="relative max-w-lg w-full translate-y-[-80px] lg:ml-16">
                   <video autoPlay muted loop playsInline className="block h-auto max-h-[550px] w-auto max-w-full">
                     <source
                       src="https://socialmediamkt.softwarenicaragua.com/wp-content/uploads/2025/08/investi-motion_-1.mp4"
