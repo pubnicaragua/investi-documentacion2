@@ -567,8 +567,8 @@ export default function InvestiLandingPage() {
                 </div>
               </div>
 
-              <div className="lg:w-1/2 flex justify-center lg:justify-start pl-8">
-                <div className="relative max-w-lg w-full translate-y-[-40px]">
+              <div className="lg:w-1/2 flex justify-center lg:justify-end pr-4">
+                <div className="relative max-w-lg w-full translate-y-[-80px]">
                   <video autoPlay muted loop playsInline className="block h-auto max-h-[550px] w-auto max-w-full">
                     <source
                       src="https://socialmediamkt.softwarenicaragua.com/wp-content/uploads/2025/08/investi-motion_-1.mp4"
