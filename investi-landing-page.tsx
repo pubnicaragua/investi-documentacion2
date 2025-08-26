@@ -518,13 +518,13 @@ export default function InvestiLandingPage() {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative w-full py-20 md:py-32 lg:py-40 bg-gradient-to-br from-blue-50 via-white to-blue-50 overflow-hidden">
+        <section className="relative w-full py-12 md:py-20 lg:py-32 xl:py-40 bg-gradient-to-br from-blue-50 via-white to-blue-50 overflow-hidden">
           <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
           <div className="w-full max-w-7xl mx-auto px-4 md:px-6 relative z-10">
-            <div className="grid lg:grid-cols-2 gap-20 items-center">
-              <div className="flex flex-col space-y-8 text-center lg:text-left max-w-2xl mx-auto lg:mx-0">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 xl:gap-20 items-center">
+              <div className="flex flex-col space-y-6 md:space-y-8 text-center lg:text-left max-w-2xl mx-auto lg:mx-0 order-2 lg:order-1">
                 <div className="space-y-4">
-                  <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight leading-none">
+                  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-black tracking-tight leading-none">
                     <span className="bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
                       Conecta
                     </span>{" "}
@@ -537,7 +537,7 @@ export default function InvestiLandingPage() {
                       Financiero
                     </span>
                   </h1>
-                  <p className="text-xl md:text-2xl text-gray-600 leading-relaxed">
+                  <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 leading-relaxed">
                     La primera <span className="font-bold text-blue-600">red social</span> de{" "}
                     <span className="font-bold text-blue-600">educación financiera</span> potenciada con IA.
                     <span className="font-semibold text-blue-600"> Aprende, conecta y crece</span> junto a miles de
@@ -545,41 +545,48 @@ export default function InvestiLandingPage() {
                   </p>
                 </div>
 
-                <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center lg:justify-start">
                   <Button
                     size="lg"
-                    className="h-14 px-8 text-lg bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white shadow-xl transition-all duration-300 transform hover:scale-105"
+                    className="h-12 md:h-14 px-6 md:px-8 text-base md:text-lg bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white shadow-xl transition-all duration-300 transform hover:scale-105"
                     onClick={() => scrollToSection("register")}
                   >
-                    Únete a la red social de educación financiera
+                    <span className="hidden sm:inline">Únete a la red social de educación financiera</span>
+                    <span className="sm:hidden">Únete a la red social</span>
                   </Button>
                   <Button
                     variant="outline"
                     size="lg"
-                    className="h-14 px-8 text-lg border-2 border-blue-600 text-blue-600 hover:bg-blue-50 transition-all duration-300 transform hover:scale-105 bg-transparent"
+                    className="h-12 md:h-14 px-6 md:px-8 text-base md:text-lg border-2 border-blue-600 text-blue-600 hover:bg-blue-50 transition-all duration-300 transform hover:scale-105 bg-transparent"
                     onClick={() => scrollToSection("features")}
                   >
-                    <Play className="mr-2 h-5 w-5" />
+                    <Play className="mr-2 h-4 w-4 md:h-5 md:w-5" />
                     Ver Demo
                   </Button>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-8">
+                <div className="grid grid-cols-3 gap-4 md:gap-6 pt-6 md:pt-8">
                   {stats.map((stat, index) => (
                     <div key={index} className="text-center">
                       <div className="flex justify-center mb-2">
-                        <stat.icon className="h-8 w-8 text-blue-600" />
+                        <stat.icon className="h-6 w-6 md:h-8 md:w-8 text-blue-600" />
                       </div>
-                      <div className="text-2xl md:text-3xl font-bold text-gray-900">{stat.number}</div>
-                      <div className="text-sm text-gray-600">{stat.label}</div>
+                      <div className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-900">{stat.number}</div>
+                      <div className="text-xs md:text-sm text-gray-600">{stat.label}</div>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="lg:w-1/2 flex justify-center lg:justify-end">
-                <div className="relative max-w-lg w-full translate-y-[-80px] lg:ml-16">
-                  <video autoPlay muted loop playsInline className="block h-auto max-h-[550px] w-auto max-w-full">
+              <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
+                <div className="relative w-full max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl">
+                  <video
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="w-full h-auto max-h-[300px] sm:max-h-[400px] md:max-h-[450px] lg:max-h-[500px] xl:max-h-[550px] object-contain lg:translate-y-[-40px] xl:translate-y-[-60px]"
+                  >
                     <source
                       src="https://socialmediamkt.softwarenicaragua.com/wp-content/uploads/2025/08/investi-motion_-1.mp4"
                       type="video/mp4"
@@ -608,7 +615,7 @@ export default function InvestiLandingPage() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
               {features.map((feature, index) => (
                 <Card
                   key={index}
@@ -620,14 +627,18 @@ export default function InvestiLandingPage() {
                 >
                   <CardHeader className="pb-4 text-center">
                     <div className="flex justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                      {typeof feature.icon === "function" ? feature.icon() : <feature.icon className="h-10 w-10" />}
+                      {typeof feature.icon === "function" ? (
+                        feature.icon()
+                      ) : (
+                        <feature.icon className="h-8 w-8 md:h-10 md:w-10" />
+                      )}
                     </div>
-                    <CardTitle className="text-2xl font-bold group-hover:text-blue-600 transition-colors">
+                    <CardTitle className="text-xl md:text-2xl font-bold group-hover:text-blue-600 transition-colors">
                       {feature.title}
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="text-center">
-                    <CardDescription className="text-gray-600 text-base leading-relaxed">
+                    <CardDescription className="text-gray-600 text-sm md:text-base leading-relaxed">
                       {feature.description}
                     </CardDescription>
                   </CardContent>
@@ -1285,11 +1296,11 @@ export default function InvestiLandingPage() {
             </Button>
           </div>
 
-          <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
+          <div className="flex-1 overflow-y-auto p-3 md:p-4 space-y-4 bg-gray-50 max-h-[60vh] md:max-h-[70vh]">
             {chatMessages.map((msg) => (
               <div key={msg.id} className={`flex ${msg.isBot ? "justify-start" : "justify-end"}`}>
                 <div
-                  className={`max-w-[85%] p-3 rounded-2xl ${
+                  className={`max-w-[90%] md:max-w-[85%] p-2 md:p-3 rounded-2xl text-sm md:text-base ${
                     msg.isBot
                       ? "bg-white text-gray-900 shadow-sm border"
                       : "bg-gradient-to-r from-blue-600 to-cyan-600 text-white"
