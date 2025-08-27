@@ -1,84 +1,60 @@
 import { type NextRequest, NextResponse } from "next/server"
 
-const SENDGRID_API_KEY = "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"
-const SENDGRID_API_URL = "https://api.sendgrid.com/v3/mail/send"
-
 export async function POST(request: NextRequest) {
   try {
-    const formData = await request.json()
+    const { name, email, phone, interests } = await request.json()
 
-    const emailData = {
-      personalizations: [
-        {
-          to: [
-            {
-              email: "contacto@investiiapp.com",
-              name: "Equipo Investi",
-            },
-          ],
-          subject: `Nueva solicitud de registro - ${formData.name}`,
-        },
-      ],
-      from: {
-        email: "noreply@investiapp.com",
-        name: "Investi Landing Page",
-      },
-      content: [
-        {
-          type: "text/html",
-          value: `
-            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-              <h2 style="color: #2563eb;">Nueva Solicitud de Registro - Investi</h2>
-              
-              <div style="background-color: #f8fafc; padding: 20px; border-radius: 8px; margin: 20px 0;">
-                <h3 style="color: #1e293b; margin-top: 0;">Información Personal</h3>
-                <p><strong>Nombre:</strong> ${formData.name}</p>
-                <p><strong>Email:</strong> ${formData.email}</p>
-                <p><strong>Teléfono:</strong> ${formData.phone}</p>
-                <p><strong>Edad:</strong> ${formData.age}</p>
-              </div>
-
-              <div style="background-color: #f0f9ff; padding: 20px; border-radius: 8px; margin: 20px 0;">
-                <h3 style="color: #1e293b; margin-top: 0;">Objetivos de Educación Financiera</h3>
-                <ul>
-                  ${formData.goals.map((goal: string) => `<li>${goal}</li>`).join("")}
-                </ul>
-              </div>
-
-              <div style="background-color: #f0fdf4; padding: 20px; border-radius: 8px; margin: 20px 0;">
-                <h3 style="color: #1e293b; margin-top: 0;">Intereses</h3>
-                <ul>
-                  ${formData.interests.map((interest: string) => `<li>${interest}</li>`).join("")}
-                </ul>
-              </div>
-
-              <div style="background-color: #fafafa; padding: 15px; border-radius: 8px; margin: 20px 0;">
-                <p style="margin: 0; color: #64748b;"><strong>Fecha de registro:</strong> ${new Date(formData.timestamp).toLocaleString("es-ES")}</p>
-              </div>
-            </div>
-          `,
-        },
-      ],
+    // Verificar que la API key esté configurada
+    const apiKey = process.env.SENDGRID_API_KEY
+    if (!apiKey) {
+      console.error("[v0] SENDGRID_API_KEY no está configurada")
+      return NextResponse.json({ error: "Configuración de email no disponible" }, { status: 500 })
     }
 
-    const response = await fetch(SENDGRID_API_URL, {
+    // Preparar el contenido del email
+    const emailContent = `
+      <h2>Nuevo registro en Investi</h2>
+      <p><strong>Nombre:</strong> ${name}</p>
+      <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Teléfono:</strong> ${phone}</p>
+      <p><strong>Intereses:</strong> ${interests.join(", ")}</p>
+      <p><strong>Fecha:</strong> ${new Date().toLocaleString("es-ES")}</p>
+    `
+
+    // Enviar email usando fetch (sin dependencias externas)
+    const response = await fetch("https://api.sendgrid.com/v3/mail/send", {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${SENDGRID_API_KEY}`,
+        Authorization: `Bearer ${apiKey}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(emailData),
+      body: JSON.stringify({
+        personalizations: [
+          {
+            to: [{ email: "contacto@investiiapp.com" }],
+            subject: `Nuevo registro: ${name}`,
+          },
+        ],
+        from: { email: "noreply@investiiapp.com", name: "Investi" },
+        content: [
+          {
+            type: "text/html",
+            value: emailContent,
+          },
+        ],
+      }),
     })
 
-    if (response.ok) {
-      return NextResponse.json({ success: true })
-    } else {
+    if (!response.ok) {
       const errorData = await response.text()
-      console.error("SendGrid error:", errorData)
-      return NextResponse.json({ error: "Failed to send email" }, { status: 500 })
+      console.error("[v0] Error de SendGrid:", response.status, errorData)
+      return NextResponse.json({ error: "Error al enviar el email" }, { status: 500 })
     }
+
+    console.log("[v0] Email enviado exitosamente")
+    return NextResponse.json({ success: true })
   } catch (error) {
-    console.error("Error sending email:", error)
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 })
+    console.error("[v0] Error en API route:", error)
+    return NextResponse.json({ error: "Error interno del servidor" }, { status: 500 })
   }
 }
