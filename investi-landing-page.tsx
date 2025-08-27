@@ -236,6 +236,8 @@ export default function InvestiLandingPage() {
     }
 
     try {
+      console.log("[v0] Submitting form...")
+
       const formData = {
         name,
         email,
@@ -246,6 +248,8 @@ export default function InvestiLandingPage() {
         timestamp: new Date().toISOString(),
       }
 
+      console.log("[v0] Form data:", formData)
+
       const response = await fetch("/api/send-email", {
         method: "POST",
         headers: {
@@ -253,6 +257,11 @@ export default function InvestiLandingPage() {
         },
         body: JSON.stringify(formData),
       })
+
+      console.log("[v0] Response status:", response.status)
+
+      const responseData = await response.json()
+      console.log("[v0] Response data:", responseData)
 
       if (response.ok) {
         setMessage("¡Gracias! Tu solicitud ha sido enviada exitosamente. Te contactaremos pronto.")
@@ -265,10 +274,11 @@ export default function InvestiLandingPage() {
         setSelectedInterests([])
         setAcceptTerms(false)
       } else {
-        throw new Error("Error al enviar el formulario")
+        throw new Error(responseData.error || "Error al enviar el formulario")
       }
-    } catch (error) {
-      setMessage("Hubo un error al enviar tu solicitud. Por favor, inténtalo de nuevo.")
+    } catch (error: any) {
+      console.error("[v0] Form submission error:", error)
+      setMessage(`Hubo un error al enviar tu solicitud: ${error.message}. Por favor, inténtalo de nuevo.`)
     }
 
     setIsSubmitting(false)

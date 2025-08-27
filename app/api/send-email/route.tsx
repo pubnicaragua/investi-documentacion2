@@ -1,76 +1,81 @@
 import { type NextRequest, NextResponse } from "next/server"
 import sgMail from "@sendgrid/mail"
-import { supabase } from "@/lib/supabase"
+import { createClient } from "@supabase/supabase-js"
 
+// Initialize SendGrid
 sgMail.setApiKey(process.env.SENDGRID_API_KEY!)
+
+// Initialize Supabase
+const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!)
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json()
-    const { nombre, email, telefono, objetivoFinanciero } = body
+    console.log("[v0] API route called")
 
-    // Validar datos requeridos
-    if (!nombre || !email) {
+    const body = await request.json()
+    console.log("[v0] Request body:", body)
+
+    const { name, email, phone, age, goals, interests, timestamp } = body
+
+    // Validate required fields
+    if (!name || !email) {
+      console.log("[v0] Missing required fields")
       return NextResponse.json({ error: "Nombre y email son requeridos" }, { status: 400 })
     }
 
+    console.log("[v0] Saving to Supabase...")
     const { data: supabaseData, error: supabaseError } = await supabase
       .from("formularios_landing")
       .insert([
         {
-          nombre,
-          email,
-          telefono: telefono || null,
-          objetivo_financiero: objetivoFinanciero || null,
+          nombre: name,
+          email: email,
+          telefono: phone || null,
+          edad: age || null,
+          objetivos: goals || [],
+          intereses: interests || [],
+          fecha_registro: timestamp || new Date().toISOString(),
         },
       ])
       .select()
 
     if (supabaseError) {
-      console.error("Error al guardar en Supabase:", supabaseError)
-      return NextResponse.json({ error: "Error al guardar los datos" }, { status: 500 })
+      console.log("[v0] Supabase error:", supabaseError)
+      return NextResponse.json(
+        { error: "Error al guardar en base de datos: " + supabaseError.message },
+        { status: 500 },
+      )
     }
 
+    console.log("[v0] Saved to Supabase successfully:", supabaseData)
+
+    console.log("[v0] Sending email...")
     const msg = {
       to: "contacto@investiiapp.com",
-      from: "contacto@investiiapp.com", // Debe ser un email verificado en SendGrid
-      subject: `Nuevo registro desde Investi Landing - ${nombre}`,
+      from: "contacto@investiiapp.com", // Must be verified sender
+      subject: `Nuevo registro Beta - ${name}`,
       html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #1e40af;">Nuevo registro desde Investi Landing</h2>
-          
-          <div style="background-color: #f8fafc; padding: 20px; border-radius: 8px; margin: 20px 0;">
-            <h3 style="color: #334155; margin-top: 0;">Información del usuario:</h3>
-            <p><strong>Nombre:</strong> ${nombre}</p>
-            <p><strong>Email:</strong> ${email}</p>
-            <p><strong>Teléfono:</strong> ${telefono || "No proporcionado"}</p>
-            <p><strong>Objetivo Financiero:</strong> ${objetivoFinanciero || "No especificado"}</p>
-          </div>
-          
-          <div style="background-color: #dbeafe; padding: 15px; border-radius: 8px; margin: 20px 0;">
-            <p style="margin: 0; color: #1e40af;">
-              <strong>Fecha de registro:</strong> ${new Date().toLocaleString("es-ES")}
-            </p>
-          </div>
-          
-          <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 30px 0;">
-          
-          <p style="color: #64748b; font-size: 14px;">
-            Este email fue generado automáticamente desde la landing page de Investi.
-          </p>
-        </div>
+        <h2>Nuevo registro para Beta de Investï</h2>
+        <p><strong>Nombre:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Teléfono:</strong> ${phone || "No proporcionado"}</p>
+        <p><strong>Edad:</strong> ${age || "No proporcionada"}</p>
+        <p><strong>Objetivos:</strong> ${goals?.join(", ") || "Ninguno seleccionado"}</p>
+        <p><strong>Intereses:</strong> ${interests?.join(", ") || "Ninguno seleccionado"}</p>
+        <p><strong>Fecha:</strong> ${new Date(timestamp || Date.now()).toLocaleString("es-ES")}</p>
       `,
     }
 
     await sgMail.send(msg)
+    console.log("[v0] Email sent successfully")
 
     return NextResponse.json({
       success: true,
-      message: "Formulario enviado y guardado exitosamente",
+      message: "Formulario enviado exitosamente",
       data: supabaseData,
     })
   } catch (error: any) {
-    console.error("Error completo:", error)
-    return NextResponse.json({ error: "Error interno del servidor", details: error.message }, { status: 500 })
+    console.error("[v0] API Error:", error)
+    return NextResponse.json({ error: "Error interno del servidor: " + error.message }, { status: 500 })
   }
 }
