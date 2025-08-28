@@ -9,6 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Checkbox } from "@/components/ui/checkbox"
 import Image from "next/image"
 import Link from "next/link"
+import Head from "next/head"
 import {
   Users,
   Share2,
@@ -23,6 +24,9 @@ import {
   Lock,
   Globe,
   Award,
+  ChevronDown,
+  ChevronUp,
+  HelpCircle,
 } from "lucide-react"
 import { useState, useEffect, useRef } from "react"
 
@@ -49,6 +53,39 @@ const scrollToSection = (sectionId: string) => {
   }
 }
 
+const faqData = [
+  {
+    question: "¿Qué es Investï y cómo funciona?",
+    answer:
+      "Investï es la primera red social de educación financiera potenciada con IA. Combinamos inteligencia artificial, gamificación y comunidad para crear una experiencia de aprendizaje única. Nuestra IA mentor, Irï, te acompaña 24/7 en tu camino hacia la educación financiera.",
+  },
+  {
+    question: "¿Es seguro invertir siguiendo los consejos de Investï?",
+    answer:
+      "Investï se enfoca en educación financiera, no en recomendaciones de inversión específicas. Irï te guía para que tomes decisiones informadas basadas en tu perfil de riesgo y objetivos. Siempre recomendamos consultar con asesores financieros profesionales antes de realizar inversiones importantes.",
+  },
+  {
+    question: "¿Cuánto cuesta acceder a la plataforma?",
+    answer:
+      "Durante la fase beta, el acceso es completamente gratuito para los primeros 1,000 usuarios. Esto incluye acceso completo a Irï, comunidades de aprendizaje, contenido educativo y todas las funcionalidades de gamificación.",
+  },
+  {
+    question: "¿Qué nivel de conocimiento financiero necesito?",
+    answer:
+      "Investï está diseñado para todos los niveles, desde principiantes hasta inversionistas experimentados. Irï adapta el contenido y las recomendaciones según tu nivel de conocimiento y experiencia, creando un plan de aprendizaje personalizado.",
+  },
+  {
+    question: "¿Cómo protegen mis datos personales y financieros?",
+    answer:
+      "La seguridad es nuestra prioridad. Utilizamos encriptación de grado bancario, cumplimos con regulaciones internacionales de protección de datos y nunca compartimos información personal con terceros sin tu consentimiento explícito.",
+  },
+  {
+    question: "¿Puedo acceder desde mi móvil?",
+    answer:
+      "Sí, Investï está optimizado para todos los dispositivos. Puedes acceder desde tu computadora, tablet o smartphone con la misma experiencia completa. Próximamente lanzaremos nuestras apps nativas para iOS y Android.",
+  },
+]
+
 export default function InvestiLandingPage() {
   const [email, setEmail] = useState("")
   const [name, setName] = useState("")
@@ -74,6 +111,12 @@ export default function InvestiLandingPage() {
   const [isTyping, setIsTyping] = useState(false)
   const [showQuickActions, setShowQuickActions] = useState(true)
   const chatEndRef = useRef<HTMLDivElement>(null)
+
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null)
+
+  const toggleFaq = (index: number) => {
+    setOpenFaqIndex(openFaqIndex === index ? null : index)
+  }
 
   const scrollToBottom = () => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" })
@@ -474,948 +517,1085 @@ export default function InvestiLandingPage() {
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-white text-gray-900 relative">
-      {/* Header */}
-      <header className="px-4 lg:px-6 h-20 flex items-center justify-center bg-white/95 backdrop-blur-sm shadow-sm sticky top-0 z-40 border-b">
-        <div className="w-full max-w-7xl flex items-center justify-between">
-          <Link href="#" className="flex items-center gap-3">
-            <Image
-              src="/investi-logo-new-main.png"
-              alt="Investï - Plataforma de Educación Financiera"
-              width={150}
-              height={40}
-              className="h-10 w-auto"
-              priority
-            />
-            <Badge variant="secondary" className="bg-blue-100 text-blue-700">
-              Beta
-            </Badge>
-          </Link>
-          <nav className="hidden md:flex gap-8">
-            <button
-              onClick={() => scrollToSection("features")}
-              className="text-sm font-medium hover:text-blue-600 transition-colors cursor-pointer"
-            >
-              Características
-            </button>
-            <button
-              onClick={() => scrollToSection("community")}
-              className="text-sm font-medium hover:text-blue-600 transition-colors cursor-pointer"
-            >
-              Comunidad
-            </button>
-            <button
-              onClick={() => scrollToSection("roadmap")}
-              className="text-sm font-medium hover:text-blue-600 transition-colors cursor-pointer"
-            >
-              Roadmap
-            </button>
-            <button
-              onClick={() => scrollToSection("testimonials")}
-              className="text-sm font-medium hover:text-blue-600 transition-colors cursor-pointer"
-            >
-              Testimonios
-            </button>
-          </nav>
-          <Button
-            className="bg-blue-600 hover:bg-blue-700 text-white shadow-lg"
-            onClick={() => scrollToSection("register")}
-          >
-            Regístrate Ahora
-          </Button>
-        </div>
-      </header>
+    <>
+      <Head>
+        <title>Investï - Red Social de Educación Financiera con IA | Aprende a Invertir</title>
+        <meta
+          name="description"
+          content="Únete a la primera red social de educación financiera potenciada con IA. Aprende a invertir, conecta con inversionistas y crece financieramente con Irï, tu mentor personal 24/7."
+        />
+        <meta
+          name="keywords"
+          content="educación financiera, inversiones, IA financiera, red social inversores, mentor financiero, Irï, aprender a invertir, comunidad financiera, gamificación financiera"
+        />
+        <meta name="author" content="Investï SpA" />
+        <meta name="robots" content="index, follow" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-      <main className="flex-1">
-        {/* Hero Section */}
-        <section className="relative w-full py-12 md:py-20 lg:py-32 xl:py-40 bg-gradient-to-br from-blue-50 via-white to-blue-50 overflow-hidden">
-          <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
-          <div className="w-full max-w-7xl mx-auto px-4 md:px-6 relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 xl:gap-20 items-center">
-              <div className="flex flex-col space-y-6 md:space-y-8 text-center lg:text-left max-w-2xl mx-auto lg:mx-0 order-2 lg:order-1">
-                <div className="space-y-4">
-                  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-black tracking-tight leading-none">
-                    <span className="bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
-                      Conecta
-                    </span>{" "}
-                    <span className="text-gray-900">con tu </span>
-                    <span className="bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">
-                      Futuro
-                    </span>
-                    <br />
-                    <span className="bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">
-                      Financiero
-                    </span>
-                  </h1>
-                  <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 leading-relaxed">
-                    La primera <span className="font-bold text-blue-600">red social</span> de{" "}
-                    <span className="font-bold text-blue-600">educación financiera</span> potenciada con IA.
-                    <span className="font-semibold text-blue-600"> Aprende, conecta y crece</span> junto a miles de
-                    personas que buscan mejorar su futuro financiero.
-                  </p>
-                </div>
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://investiapp.com/" />
+        <meta property="og:title" content="Investï - Red Social de Educación Financiera con IA" />
+        <meta
+          property="og:description"
+          content="La primera red social de educación financiera potenciada con IA. Aprende, conecta y crece junto a miles de inversionistas."
+        />
+        <meta property="og:image" content="https://investiapp.com/investi-og-image.png" />
+        <meta property="og:site_name" content="Investï" />
+        <meta property="og:locale" content="es_ES" />
 
-                <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center lg:justify-start">
-                  <Button
-                    size="lg"
-                    className="h-12 md:h-14 px-6 md:px-8 text-base md:text-lg bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white shadow-xl transition-all duration-300 transform hover:scale-105"
-                    onClick={() => scrollToSection("register")}
-                  >
-                    <span className="hidden sm:inline">Únete a la red social de educación financiera</span>
-                    <span className="sm:hidden">Únete a la red social</span>
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    className="h-12 md:h-14 px-6 md:px-8 text-base md:text-lg border-2 border-blue-600 text-blue-600 hover:bg-blue-50 transition-all duration-300 transform hover:scale-105 bg-transparent"
-                    onClick={() => scrollToSection("features")}
-                  >
-                    <Play className="mr-2 h-4 w-4 md:h-5 md:w-5" />
-                    Ver Demo
-                  </Button>
-                </div>
+        {/* Twitter */}
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://investiapp.com/" />
+        <meta property="twitter:title" content="Investï - Red Social de Educación Financiera con IA" />
+        <meta
+          property="twitter:description"
+          content="Únete a la revolución de la educación financiera. Aprende con IA, conecta con inversionistas y alcanza tus metas financieras."
+        />
+        <meta property="twitter:image" content="https://investiapp.com/investi-twitter-image.png" />
 
-                <div className="grid grid-cols-3 gap-4 md:gap-6 pt-6 md:pt-8">
-                  {stats.map((stat, index) => (
-                    <div key={index} className="text-center">
-                      <div className="flex justify-center mb-2">
-                        <stat.icon className="h-6 w-6 md:h-8 md:w-8 text-blue-600" />
+        {/* Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "Investï",
+              description: "Red social de educación financiera potenciada con IA",
+              url: "https://investiapp.com",
+              logo: "https://investiapp.com/investi-logo.png",
+              sameAs: ["https://www.instagram.com/investi_chile"],
+              contactPoint: {
+                "@type": "ContactPoint",
+                telephone: "+56-9-1234-5678",
+                contactType: "customer service",
+                availableLanguage: "Spanish",
+              },
+            }),
+          }}
+        />
+      </Head>
+
+      <div className="flex flex-col min-h-screen bg-white text-gray-900 relative">
+        {/* Header */}
+        <header className="px-4 lg:px-6 h-20 flex items-center justify-center bg-white/95 backdrop-blur-sm shadow-sm sticky top-0 z-40 border-b">
+          <div className="w-full max-w-7xl flex items-center justify-between">
+            <Link href="#" className="flex items-center gap-3">
+              <Image
+                src="/investi-logo-new-main.png"
+                alt="Investï - Plataforma de Educación Financiera"
+                width={150}
+                height={40}
+                className="h-10 w-auto"
+                priority
+              />
+              <Badge variant="secondary" className="bg-blue-100 text-blue-700">
+                Beta
+              </Badge>
+            </Link>
+            <nav className="hidden md:flex gap-8">
+              <button
+                onClick={() => scrollToSection("features")}
+                className="text-sm font-medium hover:text-blue-600 transition-colors cursor-pointer"
+              >
+                Características
+              </button>
+              <button
+                onClick={() => scrollToSection("community")}
+                className="text-sm font-medium hover:text-blue-600 transition-colors cursor-pointer"
+              >
+                Comunidad
+              </button>
+              <button
+                onClick={() => scrollToSection("faq")}
+                className="text-sm font-medium hover:text-blue-600 transition-colors cursor-pointer"
+              >
+                FAQ
+              </button>
+              <button
+                onClick={() => scrollToSection("roadmap")}
+                className="text-sm font-medium hover:text-blue-600 transition-colors cursor-pointer"
+              >
+                Roadmap
+              </button>
+              <button
+                onClick={() => scrollToSection("testimonials")}
+                className="text-sm font-medium hover:text-blue-600 transition-colors cursor-pointer"
+              >
+                Testimonios
+              </button>
+            </nav>
+            <Button
+              className="bg-blue-600 hover:bg-blue-700 text-white shadow-lg"
+              onClick={() => scrollToSection("register")}
+            >
+              Regístrate Ahora
+            </Button>
+          </div>
+        </header>
+
+        <main className="flex-1">
+          {/* Hero Section */}
+          <section className="relative w-full py-12 md:py-20 lg:py-32 xl:py-40 bg-gradient-to-br from-blue-50 via-white to-blue-50 overflow-hidden">
+            <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
+            <div className="w-full max-w-7xl mx-auto px-4 md:px-6 relative z-10">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 xl:gap-20 items-center">
+                <div className="flex flex-col space-y-6 md:space-y-8 text-center lg:text-left max-w-2xl mx-auto lg:mx-0 order-2 lg:order-1">
+                  <div className="space-y-4">
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-black tracking-tight leading-none">
+                      <span className="bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
+                        Conecta
+                      </span>{" "}
+                      <span className="text-gray-900">con tu </span>
+                      <span className="bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">
+                        Futuro
+                      </span>
+                      <br />
+                      <span className="bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">
+                        Financiero
+                      </span>
+                    </h1>
+                    <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 leading-relaxed">
+                      La primera <span className="font-bold text-blue-600">red social</span> de{" "}
+                      <span className="font-bold text-blue-600">educación financiera</span> potenciada con IA.
+                      <span className="font-semibold text-blue-600"> Aprende, conecta y crece</span> junto a miles de
+                      personas que buscan mejorar su futuro financiero.
+                    </p>
+                  </div>
+
+                  <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center lg:justify-start">
+                    <Button
+                      size="lg"
+                      className="h-12 md:h-14 px-6 md:px-8 text-base md:text-lg bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white shadow-xl transition-all duration-300 transform hover:scale-105"
+                      onClick={() => scrollToSection("register")}
+                    >
+                      <span className="hidden sm:inline">Únete a la red social de educación financiera</span>
+                      <span className="sm:hidden">Únete a la red social</span>
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="lg"
+                      className="h-12 md:h-14 px-6 md:px-8 text-base md:text-lg border-2 border-blue-600 text-blue-600 hover:bg-blue-50 transition-all duration-300 transform hover:scale-105 bg-transparent"
+                      onClick={() => scrollToSection("features")}
+                    >
+                      <Play className="mr-2 h-4 w-4 md:h-5 md:w-5" />
+                      Ver Demo
+                    </Button>
+                  </div>
+
+                  <div className="grid grid-cols-3 gap-4 md:gap-6 pt-6 md:pt-8">
+                    {stats.map((stat, index) => (
+                      <div key={index} className="text-center">
+                        <div className="flex justify-center mb-2">
+                          <stat.icon className="h-6 w-6 md:h-8 md:w-8 text-blue-600" />
+                        </div>
+                        <div className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-900">{stat.number}</div>
+                        <div className="text-xs md:text-sm text-gray-600">{stat.label}</div>
                       </div>
-                      <div className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-900">{stat.number}</div>
-                      <div className="text-xs md:text-sm text-gray-600">{stat.label}</div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
+                </div>
+
+                <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
+                  <div className="relative w-full max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl">
+                    <video
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      className="w-full h-auto max-h-[300px] sm:max-h-[400px] md:max-h-[450px] lg:max-h-[500px] xl:max-h-[550px] object-contain lg:translate-y-[-40px] xl:translate-y-[-60px]"
+                    >
+                      <source
+                        src="https://socialmediamkt.softwarenicaragua.com/wp-content/uploads/2025/08/investi-motion_-1.mp4"
+                        type="video/mp4"
+                      />
+                      Tu navegador no soporta el elemento de video.
+                    </video>
+                  </div>
                 </div>
               </div>
+            </div>
+          </section>
 
-              <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
-                <div className="relative w-full max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl">
-                  <video
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    className="w-full h-auto max-h-[300px] sm:max-h-[400px] md:max-h-[450px] lg:max-h-[500px] xl:max-h-[550px] object-contain lg:translate-y-[-40px] xl:translate-y-[-60px]"
+          {/* Features Section */}
+          <section id="features" className="w-full py-20 md:py-32 bg-gray-50">
+            <div className="w-full max-w-7xl mx-auto px-4 md:px-6">
+              <div className="text-center mb-16">
+                <Badge className="bg-blue-100 text-blue-700 px-4 py-2 text-sm font-medium mb-4">
+                  ¿Por qué Investï?
+                </Badge>
+                <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6">
+                  Una Plataforma <span className="text-blue-600">Revolucionaria</span>
+                </h2>
+                <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                  Combinamos <span className="font-bold text-blue-600">inteligencia artificial</span>,{" "}
+                  <span className="font-bold text-blue-600">gamificación</span> y{" "}
+                  <span className="font-bold text-blue-600">comunidad</span> para crear la experiencia de aprendizaje
+                  financiero más avanzada del mundo.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                {features.map((feature, index) => (
+                  <Card
+                    key={index}
+                    className="group hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border-0 bg-white overflow-hidden"
+                    style={{
+                      borderRadius: "2rem 2rem 2rem 0.5rem",
+                      background: "white",
+                    }}
                   >
-                    <source
-                      src="https://socialmediamkt.softwarenicaragua.com/wp-content/uploads/2025/08/investi-motion_-1.mp4"
-                      type="video/mp4"
-                    />
-                    Tu navegador no soporta el elemento de video.
-                  </video>
+                    <CardHeader className="pb-4 text-center">
+                      <div className="flex justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                        {typeof feature.icon === "function" ? (
+                          feature.icon()
+                        ) : (
+                          <feature.icon className="h-8 w-8 md:h-10 md:w-10" />
+                        )}
+                      </div>
+                      <CardTitle className="text-xl md:text-2xl font-bold group-hover:text-blue-600 transition-colors">
+                        {feature.title}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="text-center">
+                      <CardDescription className="text-gray-600 text-sm md:text-base leading-relaxed">
+                        {feature.description}
+                      </CardDescription>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* AI Mentor Section */}
+          <section className="w-full py-20 md:py-32 bg-gradient-to-r from-[#4a1b47] to-cyan-600 text-white">
+            <div className="w-full max-w-7xl mx-auto px-4 md:px-6">
+              <div className="grid lg:grid-cols-2 gap-12 items-center">
+                <div className="space-y-8 max-w-2xl mx-auto lg:mx-0">
+                  <div>
+                    <Badge className="bg-white/20 text-white px-4 py-2 text-sm font-medium mb-4">
+                      🤖 Inteligencia Artificial
+                    </Badge>
+                    <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
+                      Conoce a <span className="text-yellow-300">Irï</span>
+                    </h2>
+                    <p className="text-xl leading-relaxed text-white">
+                      Tu <span className="text-yellow-300 font-semibold">mentor financiero personal</span> potenciado
+                      con <span className="text-yellow-300 font-semibold">Ïnteligencia Artificial</span> que te
+                      acompañará <span className="text-yellow-300 font-semibold">24/7</span> brindándote una{" "}
+                      <span className="text-yellow-300 font-semibold">experiencia personalizada</span> enseñandote y
+                      acompañándote hacía tus <span className="text-yellow-300 font-semibold">metas financieras</span>.
+                      Irï <span className="text-yellow-300 font-semibold">no te dará recomendaciones de inversión</span>{" "}
+                      pero te{" "}
+                      <span className="text-yellow-300 font-semibold">
+                        guiará para tomes decisiones de manera informada
+                      </span>
+                      .
+                    </p>
+                  </div>
+
+                  <Button
+                    size="lg"
+                    className="bg-white text-blue-600 hover:bg-gray-100 h-14 px-8 text-lg font-semibold shadow-xl"
+                    onClick={() => setIsChatOpen(true)}
+                  >
+                    <MessageCircle className="mr-2 h-5 w-5" />
+                    Habla con Irï Ahora
+                  </Button>
+                </div>
+
+                <div className="relative flex justify-center">
+                  <Image
+                    src="https://socialmediamkt.softwarenicaragua.com/wp-content/uploads/2025/08/iri-icono-Sin-fondo.gif"
+                    width={500}
+                    height={600}
+                    alt="Chat con Irï, el mentor de IA"
+                    className="object-contain w-full h-auto rounded-2xl shadow-2xl"
+                    unoptimized
+                  />
                 </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        {/* Features Section */}
-        <section id="features" className="w-full py-20 md:py-32 bg-gray-50">
-          <div className="w-full max-w-7xl mx-auto px-4 md:px-6">
-            <div className="text-center mb-16">
-              <Badge className="bg-blue-100 text-blue-700 px-4 py-2 text-sm font-medium mb-4">¿Por qué Investï?</Badge>
-              <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6">
-                Una Plataforma <span className="text-blue-600">Revolucionaria</span>
-              </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Combinamos <span className="font-bold text-blue-600">inteligencia artificial</span>,{" "}
-                <span className="font-bold text-blue-600">gamificación</span> y{" "}
-                <span className="font-bold text-blue-600">comunidad</span> para crear la experiencia de aprendizaje
-                financiero más avanzada del mundo.
-              </p>
-            </div>
+          {/* Community Section */}
+          <section id="community" className="w-full py-20 md:py-32 bg-white">
+            <div className="w-full max-w-7xl mx-auto px-4 md:px-6">
+              <div className="text-center mb-16">
+                <Badge className="bg-blue-100 text-blue-700 px-4 py-2 text-sm font-medium mb-4">🌟 Comunidad</Badge>
+                <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6">
+                  Conecta con <span className="text-blue-600">tus intereses</span>
+                </h2>
+                <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                  Únete a nuestra plataforma educativa y descubre comunidades de aprendizaje donde podrás compartir
+                  conocimientos, hacer preguntas y crecer financieramente junto a otros estudiantes.
+                </p>
+              </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-              {features.map((feature, index) => (
-                <Card
-                  key={index}
-                  className="group hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border-0 bg-white overflow-hidden"
-                  style={{
-                    borderRadius: "2rem 2rem 2rem 0.5rem",
-                    background: "white",
-                  }}
-                >
-                  <CardHeader className="pb-4 text-center">
-                    <div className="flex justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                      {typeof feature.icon === "function" ? (
-                        feature.icon()
-                      ) : (
-                        <feature.icon className="h-8 w-8 md:h-10 md:w-10" />
-                      )}
-                    </div>
-                    <CardTitle className="text-xl md:text-2xl font-bold group-hover:text-blue-600 transition-colors">
-                      {feature.title}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="text-center">
-                    <CardDescription className="text-gray-600 text-sm md:text-base leading-relaxed">
-                      {feature.description}
-                    </CardDescription>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
+              <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-6 mb-16 max-w-4xl mx-auto">
+                {communities.map((community, index) => (
+                  <Card
+                    key={index}
+                    className={`group hover:shadow-xl transition-all duration-300 border-0 overflow-hidden bg-gradient-to-br ${community.color}`}
+                  >
+                    <CardHeader className="text-white pb-2">
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="text-3xl">{community.icon}</div>
+                        <Button
+                          size="sm"
+                          className="bg-white/20 hover:bg-white/30 text-white border-white/30"
+                          variant="outline"
+                        >
+                          📋 Unirse
+                        </Button>
+                      </div>
+                      <CardTitle className="text-xl text-white font-bold">{community.name}</CardTitle>
+                    </CardHeader>
+                    <CardContent className="text-white/90 pt-0">
+                      <div className="flex items-center gap-4 text-sm">
+                        <div className="flex items-center gap-1">
+                          <Users className="h-4 w-4" />
+                          <span>{community.members}</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          {community.isPrivate ? <Lock className="h-4 w-4" /> : <Globe className="h-4 w-4" />}
+                          <span>{community.type}</span>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
 
-        {/* AI Mentor Section */}
-        <section className="w-full py-20 md:py-32 bg-gradient-to-r from-[#4a1b47] to-cyan-600 text-white">
-          <div className="w-full max-w-7xl mx-auto px-4 md:px-6">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div className="space-y-8 max-w-2xl mx-auto lg:mx-0">
-                <div>
-                  <Badge className="bg-white/20 text-white px-4 py-2 text-sm font-medium mb-4">
-                    🤖 Inteligencia Artificial
-                  </Badge>
-                  <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
-                    Conoce a <span className="text-yellow-300">Irï</span>
-                  </h2>
-                  <p className="text-xl leading-relaxed text-white">
-                    Tu <span className="text-yellow-300 font-semibold">mentor financiero personal</span> potenciado con{" "}
-                    <span className="text-yellow-300 font-semibold">Ïnteligencia Artificial</span> que te acompañará{" "}
-                    <span className="text-yellow-300 font-semibold">24/7</span> brindándote una{" "}
-                    <span className="text-yellow-300 font-semibold">experiencia personalizada</span> enseñandote y
-                    acompañándote hacía tus <span className="text-yellow-300 font-semibold">metas financieras</span>.
-                    Irï <span className="text-yellow-300 font-semibold">no te dará recomendaciones de inversión</span>{" "}
-                    pero te{" "}
-                    <span className="text-yellow-300 font-semibold">
-                      guiará para tomes decisiones de manera informada
-                    </span>
-                    .
-                  </p>
-                </div>
-
+              <div className="text-center">
+                <p className="text-gray-600 mb-6">
+                  También te puede interesar seguir a estas personas basado en tus preferencias
+                </p>
+                <Image
+                  src="https://socialmediamkt.softwarenicaragua.com/wp-content/uploads/2025/08/iri-icono-tipografia-Sin-fondo-.gif"
+                  width={600}
+                  height={400}
+                  alt="Red de comunidad Investï"
+                  className="mx-auto rounded-2xl shadow-2xl mb-8"
+                  unoptimized
+                />
                 <Button
                   size="lg"
-                  className="bg-white text-blue-600 hover:bg-gray-100 h-14 px-8 text-lg font-semibold shadow-xl"
+                  className="bg-blue-600 hover:bg-blue-700 text-white h-14 px-8 text-lg"
+                  onClick={() => scrollToSection("register")}
+                >
+                  <Users className="mr-2 h-5 w-5" />
+                  Explora Todas las Comunidades
+                </Button>
+              </div>
+            </div>
+          </section>
+
+          <section id="faq" className="w-full py-20 md:py-32 bg-gradient-to-br from-blue-50 via-white to-cyan-50">
+            <div className="w-full max-w-4xl mx-auto px-4 md:px-6">
+              <div className="text-center mb-16">
+                <Badge className="bg-blue-100 text-blue-700 px-4 py-2 text-sm font-medium mb-4">
+                  <HelpCircle className="w-4 h-4 mr-2 inline" />
+                  Preguntas Frecuentes
+                </Badge>
+                <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6">
+                  Todo lo que <span className="text-blue-600">Necesitas Saber</span>
+                </h2>
+                <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                  Resolvemos las dudas más comunes sobre Investï para que puedas tomar la mejor decisión para tu futuro
+                  financiero.
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                {faqData.map((faq, index) => (
+                  <Card
+                    key={index}
+                    className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden bg-white"
+                  >
+                    <CardHeader
+                      className="cursor-pointer hover:bg-gray-50 transition-colors duration-200"
+                      onClick={() => toggleFaq(index)}
+                    >
+                      <div className="flex items-center justify-between">
+                        <CardTitle className="text-lg md:text-xl font-semibold text-gray-900 pr-4">
+                          {faq.question}
+                        </CardTitle>
+                        <div className="flex-shrink-0">
+                          {openFaqIndex === index ? (
+                            <ChevronUp className="h-6 w-6 text-blue-600" />
+                          ) : (
+                            <ChevronDown className="h-6 w-6 text-gray-400" />
+                          )}
+                        </div>
+                      </div>
+                    </CardHeader>
+                    {openFaqIndex === index && (
+                      <CardContent className="pt-0 pb-6">
+                        <div className="border-t border-gray-100 pt-4">
+                          <p className="text-gray-700 leading-relaxed text-base">{faq.answer}</p>
+                        </div>
+                      </CardContent>
+                    )}
+                  </Card>
+                ))}
+              </div>
+
+              <div className="text-center mt-12">
+                <p className="text-gray-600 mb-6">¿Tienes más preguntas? Nuestro equipo está aquí para ayudarte.</p>
+                <Button
+                  size="lg"
+                  className="bg-blue-600 hover:bg-blue-700 text-white h-14 px-8 text-lg"
                   onClick={() => setIsChatOpen(true)}
                 >
                   <MessageCircle className="mr-2 h-5 w-5" />
                   Habla con Irï Ahora
                 </Button>
               </div>
+            </div>
+          </section>
 
-              <div className="relative flex justify-center">
-                <Image
-                  src="https://socialmediamkt.softwarenicaragua.com/wp-content/uploads/2025/08/iri-icono-Sin-fondo.gif"
-                  width={500}
-                  height={600}
-                  alt="Chat con Irï, el mentor de IA"
-                  className="object-contain w-full h-auto rounded-2xl shadow-2xl"
-                  unoptimized
-                />
+          {/* Testimonials Section */}
+          <section id="testimonials" className="w-full py-20 md:py-32 bg-gray-50">
+            <div className="w-full max-w-7xl mx-auto px-4 md:px-6">
+              <div className="text-center mb-16">
+                <Badge className="bg-green-100 text-green-700 px-4 py-2 text-sm font-medium mb-4">💬 Testimonios</Badge>
+                <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6">
+                  Lo que Dicen <span className="text-green-600">Nuestros Usuarios</span>
+                </h2>
               </div>
-            </div>
-          </div>
-        </section>
 
-        {/* Community Section */}
-        <section id="community" className="w-full py-20 md:py-32 bg-white">
-          <div className="w-full max-w-7xl mx-auto px-4 md:px-6">
-            <div className="text-center mb-16">
-              <Badge className="bg-blue-100 text-blue-700 px-4 py-2 text-sm font-medium mb-4">🌟 Comunidad</Badge>
-              <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6">
-                Conecta con <span className="text-blue-600">tus intereses</span>
-              </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Únete a nuestra plataforma educativa y descubre comunidades de aprendizaje donde podrás compartir
-                conocimientos, hacer preguntas y crecer financieramente junto a otros estudiantes.
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-6 mb-16 max-w-4xl mx-auto">
-              {communities.map((community, index) => (
-                <Card
-                  key={index}
-                  className={`group hover:shadow-xl transition-all duration-300 border-0 overflow-hidden bg-gradient-to-br ${community.color}`}
-                >
-                  <CardHeader className="text-white pb-2">
-                    <div className="flex items-center justify-between mb-2">
-                      <div className="text-3xl">{community.icon}</div>
-                      <Button
-                        size="sm"
-                        className="bg-white/20 hover:bg-white/30 text-white border-white/30"
-                        variant="outline"
-                      >
-                        📋 Unirse
-                      </Button>
-                    </div>
-                    <CardTitle className="text-xl text-white font-bold">{community.name}</CardTitle>
-                  </CardHeader>
-                  <CardContent className="text-white/90 pt-0">
-                    <div className="flex items-center gap-4 text-sm">
-                      <div className="flex items-center gap-1">
-                        <Users className="h-4 w-4" />
-                        <span>{community.members}</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        {community.isPrivate ? <Lock className="h-4 w-4" /> : <Globe className="h-4 w-4" />}
-                        <span>{community.type}</span>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-
-            <div className="text-center">
-              <p className="text-gray-600 mb-6">
-                También te puede interesar seguir a estas personas basado en tus preferencias
-              </p>
-              <Image
-                src="https://socialmediamkt.softwarenicaragua.com/wp-content/uploads/2025/08/iri-icono-tipografia-Sin-fondo-.gif"
-                width={600}
-                height={400}
-                alt="Red de comunidad Investï"
-                className="mx-auto rounded-2xl shadow-2xl mb-8"
-                unoptimized
-              />
-              <Button
-                size="lg"
-                className="bg-blue-600 hover:bg-blue-700 text-white h-14 px-8 text-lg"
-                onClick={() => scrollToSection("register")}
-              >
-                <Users className="mr-2 h-5 w-5" />
-                Explora Todas las Comunidades
-              </Button>
-            </div>
-          </div>
-        </section>
-
-        {/* Testimonials Section */}
-        <section id="testimonials" className="w-full py-20 md:py-32 bg-gray-50">
-          <div className="w-full max-w-7xl mx-auto px-4 md:px-6">
-            <div className="text-center mb-16">
-              <Badge className="bg-green-100 text-green-700 px-4 py-2 text-sm font-medium mb-4">💬 Testimonios</Badge>
-              <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6">
-                Lo que Dicen <span className="text-green-600">Nuestros Usuarios</span>
-              </h2>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-8">
-              {testimonials.map((testimonial, index) => (
-                <Card key={index} className="bg-white border-0 shadow-lg hover:shadow-xl transition-all duration-300">
-                  <CardHeader>
-                    <div className="flex items-center gap-4">
-                      <Image
-                        src={testimonial.avatar || "/placeholder.svg"}
-                        width={60}
-                        height={60}
-                        alt={testimonial.name}
-                        className="rounded-full"
-                        unoptimized
-                      />
-                      <div>
-                        <h3 className="font-semibold text-lg">{testimonial.name}</h3>
-                        <p className="text-gray-600">{testimonial.role}</p>
-                      </div>
-                    </div>
-                    <div className="flex gap-1">
-                      {[...Array(testimonial.rating)].map((_, i) => (
-                        <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
-                      ))}
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-gray-700 italic">"{testimonial.content}"</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Roadmap Section */}
-        <section id="roadmap" className="w-full py-20 md:py-32 bg-white">
-          <div className="w-full max-w-7xl mx-auto px-4 md:px-6">
-            <div className="text-center mb-16">
-              <Badge className="bg-indigo-100 text-indigo-700 px-4 py-2 text-sm font-medium mb-4">🗺️ Roadmap</Badge>
-              <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6">
-                El <span className="text-indigo-600">Futuro</span> de Investï: Tu Camino a la Educación Financiera
-              </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Conoce nuestros planes y únete desde el principio para ser parte de esta revolución financiera.
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {roadmapItems.map((item, index) => (
-                <Card
-                  key={index}
-                  className={`group hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 border-0 relative overflow-hidden ${
-                    item.status === "current"
-                      ? "bg-gradient-to-br from-blue-600 to-cyan-600 text-white"
-                      : "bg-white hover:bg-gray-50"
-                  }`}
-                >
-                  <div
-                    className={`absolute top-4 right-4 w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl ${
-                      item.status === "current" ? "bg-white/20 text-white" : "bg-blue-100 text-blue-600"
-                    }`}
-                  >
-                    {index + 1}
-                  </div>
-
-                  <CardHeader className="pb-4 pt-6">
-                    <Badge
-                      className={`w-fit mb-2 ${
-                        item.status === "current" ? "bg-white/20 text-white" : "bg-blue-100 text-blue-700"
-                      }`}
-                    >
-                      {item.date}
-                    </Badge>
-                    <CardTitle
-                      className={`text-xl font-bold ${
-                        item.status === "current" ? "text-white" : "text-gray-900 group-hover:text-blue-600"
-                      }`}
-                    >
-                      {item.title}
-                    </CardTitle>
-                  </CardHeader>
-
-                  <CardContent>
-                    <p
-                      className={`text-sm leading-relaxed ${
-                        item.status === "current" ? "text-white/90" : "text-gray-600"
-                      }`}
-                    >
-                      {item.description}
-                    </p>
-                    {item.status === "current" && (
-                      <Badge className="bg-green-400 text-green-900 mt-4">¡En Progreso!</Badge>
-                    )}
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Registration Section */}
-        <section
-          id="register"
-          className="w-full py-20 md:py-32 bg-gradient-to-br from-blue-600 via-cyan-600 to-indigo-600 text-white relative overflow-hidden"
-        >
-          <div className="absolute inset-0 bg-black/20"></div>
-          <div className="w-full max-w-7xl mx-auto px-4 md:px-6 relative z-10">
-            <div className="max-w-4xl mx-auto text-center mb-12">
-              <Badge className="bg-white/20 text-white px-4 py-2 text-sm font-medium mb-4">
-                🎯 Acceso Beta Exclusivo
-              </Badge>
-              <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6">
-                ¡Asegura tu Lugar en la <span className="text-yellow-300">Revolución!</span>
-              </h2>
-              <p className="text-xl leading-relaxed opacity-90 mb-8">
-                Solo los primeros 1,000 usuarios tendrán acceso beta ANTICIPADO. No pierdas esta oportunidad única de
-                ser pionero en el futuro de las finanzas.
-              </p>
-              <div className="flex flex-wrap justify-center gap-8 text-lg font-semibold">
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="h-6 w-6 text-green-300" />
-                  <span>Acceso Beta ANTICIPADO</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="h-6 w-6 text-green-300" />
-                  <span>Acceso Prioritario</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Award className="h-6 w-6 text-green-300" />
-                  <span>Badge de Beta Tester Oficial</span>
-                </div>
-              </div>
-            </div>
-
-            <Card className="max-w-3xl mx-auto p-8 bg-white/95 backdrop-blur-sm text-gray-900 shadow-2xl">
-              <CardHeader className="text-center pb-6">
-                <CardTitle className="text-3xl font-bold mb-2">Registro Beta Exclusivo</CardTitle>
-                <CardDescription className="text-lg text-gray-600">
-                  Completa el formulario y recibe tu invitación en 24-48 horas
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-8">
-                  {/* Personal Information */}
-                  <div className="bg-gray-50 p-6 rounded-xl space-y-6">
-                    <h3 className="text-xl font-semibold text-gray-900 mb-4">Información Personal</h3>
-                    <div className="grid md:grid-cols-2 gap-6">
-                      <div>
-                        <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                          Nombre Completo *
-                        </label>
-                        <Input
-                          id="name"
-                          type="text"
-                          placeholder="Tu nombre completo"
-                          value={name}
-                          onChange={(e) => setName(e.target.value)}
-                          required
-                          className="h-12 text-base"
+              <div className="grid md:grid-cols-3 gap-8">
+                {testimonials.map((testimonial, index) => (
+                  <Card key={index} className="bg-white border-0 shadow-lg hover:shadow-xl transition-all duration-300">
+                    <CardHeader>
+                      <div className="flex items-center gap-4">
+                        <Image
+                          src={testimonial.avatar || "/placeholder.svg"}
+                          width={60}
+                          height={60}
+                          alt={testimonial.name}
+                          className="rounded-full"
+                          unoptimized
                         />
+                        <div>
+                          <h3 className="font-semibold text-lg">{testimonial.name}</h3>
+                          <p className="text-gray-600">{testimonial.role}</p>
+                        </div>
                       </div>
-                      <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                          Correo Electrónico *
-                        </label>
-                        <Input
-                          id="email"
-                          type="email"
-                          placeholder="tu@email.com"
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          required
-                          className="h-12 text-base"
-                        />
+                      <div className="flex gap-1">
+                        {[...Array(testimonial.rating)].map((_, i) => (
+                          <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
+                        ))}
                       </div>
-                    </div>
-
-                    <div className="grid md:grid-cols-2 gap-6">
-                      <div>
-                        <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
-                          Teléfono (Opcional)
-                        </label>
-                        <Input
-                          id="phone"
-                          type="tel"
-                          placeholder="+56 9 1234 5678"
-                          value={phone}
-                          onChange={(e) => setPhone(e.target.value)}
-                          className="h-12 text-base"
-                        />
-                      </div>
-                      <div>
-                        <label htmlFor="age" className="block text-sm font-medium text-gray-700 mb-2">
-                          Rango de Edad *
-                        </label>
-                        <Select onValueChange={setAge} value={age} required>
-                          <SelectTrigger className="h-12 text-base">
-                            <SelectValue placeholder="Selecciona tu edad" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="18-25">18-25 años</SelectItem>
-                            <SelectItem value="26-35">26-35 años</SelectItem>
-                            <SelectItem value="36-45">36-45 años</SelectItem>
-                            <SelectItem value="46-55">46-55 años</SelectItem>
-                            <SelectItem value="56-65">56-65 años</SelectItem>
-                            <SelectItem value="65+">65+ años</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Goals Section */}
-                  <div className="bg-blue-50 p-6 rounded-xl space-y-4">
-                    <h3 className="text-xl font-semibold text-gray-900 mb-4">Tus Objetivos Financieros</h3>
-                    <label className="block text-sm font-medium text-gray-700 mb-3">
-                      ¿Qué esperas lograr con Investï? (Puedes seleccionar varios) *
-                    </label>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                      {userGoals.map((goal) => (
-                        <Button
-                          key={goal}
-                          type="button"
-                          variant={selectedGoals.includes(goal) ? "default" : "outline"}
-                          className={`h-auto py-3 px-4 text-sm font-medium transition-all duration-200 ${
-                            selectedGoals.includes(goal)
-                              ? "bg-blue-600 text-white shadow-md transform scale-105"
-                              : "border-gray-300 text-gray-700 hover:bg-blue-50 hover:border-blue-300"
-                          }`}
-                          onClick={() => handleGoalChange(goal)}
-                        >
-                          {goal}
-                        </Button>
-                      ))}
-                    </div>
-                    {selectedGoals.length === 0 && (
-                      <p className="text-red-500 text-sm mt-2 flex items-center gap-2">
-                        <span className="w-2 h-2 bg-red-500 rounded-full"></span>
-                        Por favor, selecciona al menos una meta.
-                      </p>
-                    )}
-                  </div>
-
-                  {/* Interests Section */}
-                  <div className="bg-green-50 p-6 rounded-xl space-y-4">
-                    <h3 className="text-xl font-semibold text-gray-900 mb-4">Tus Intereses de Aprendizaje</h3>
-                    <label className="block text-sm font-medium text-gray-700 mb-3">
-                      ¿Qué te gustaría aprender o en qué te interesa invertir? (Puedes seleccionar varios) *
-                    </label>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                      {learningInterests.map((interest) => (
-                        <Button
-                          key={interest}
-                          type="button"
-                          variant={selectedInterests.includes(interest) ? "default" : "outline"}
-                          className={`h-auto py-3 px-3 text-xs font-medium transition-all duration-200 text-center whitespace-normal leading-tight ${
-                            selectedInterests.includes(interest)
-                              ? "bg-green-600 text-white shadow-md transform scale-105"
-                              : "border-gray-300 text-gray-700 hover:bg-green-50 hover:border-green-300"
-                          }`}
-                          onClick={() => handleInterestChange(interest)}
-                        >
-                          {interest}
-                        </Button>
-                      ))}
-                    </div>
-                    {selectedInterests.length === 0 && (
-                      <p className="text-red-500 text-sm mt-2 flex items-center gap-2">
-                        <span className="w-2 h-2 bg-red-500 rounded-full"></span>
-                        Por favor, selecciona al menos un interés.
-                      </p>
-                    )}
-                  </div>
-
-                  {/* Terms and Conditions */}
-                  <div className="bg-gray-50 p-6 rounded-xl">
-                    <div className="flex items-start space-x-3">
-                      <Checkbox
-                        id="terms"
-                        checked={acceptTerms}
-                        onCheckedChange={(checked) => setAcceptTerms(checked as boolean)}
-                        className="mt-1"
-                      />
-                      <div className="text-sm text-gray-700 leading-relaxed">
-                        <label htmlFor="terms" className="cursor-pointer">
-                          Acepto los{" "}
-                          <Link href="/terminos" className="text-blue-600 hover:underline font-medium" target="_blank">
-                            Términos y Condiciones
-                          </Link>{" "}
-                          y la{" "}
-                          <Link
-                            href="/privacidad"
-                            className="text-blue-600 hover:underline font-medium"
-                            target="_blank"
-                          >
-                            Política de Privacidad
-                          </Link>{" "}
-                          de Investï. Entiendo que mis datos serán utilizados para contactarme sobre el programa beta y
-                          que recibiré comunicaciones relacionadas con la plataforma. *
-                        </label>
-                      </div>
-                    </div>
-                    {!acceptTerms && (
-                      <p className="text-red-500 text-sm mt-2 ml-6 flex items-center gap-2">
-                        <span className="w-2 h-2 bg-red-500 rounded-full"></span>
-                        Debes aceptar los términos y condiciones para continuar.
-                      </p>
-                    )}
-                  </div>
-
-                  <Button
-                    type="submit"
-                    className="w-full h-16 text-xl bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white shadow-xl transition-all duration-300 transform hover:scale-105 font-bold"
-                    disabled={
-                      isSubmitting ||
-                      selectedGoals.length === 0 ||
-                      selectedInterests.length === 0 ||
-                      !age ||
-                      !acceptTerms
-                    }
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white mr-3"></div>
-                        Procesando tu Registro...
-                      </>
-                    ) : (
-                      <>
-                        <Rocket className="mr-3 h-6 w-6" />
-                        ¡Quiero Mi Acceso Beta ANTICIPADO!
-                      </>
-                    )}
-                  </Button>
-
-                  {message && (
-                    <div
-                      className={`mt-6 p-6 rounded-xl text-center text-lg font-medium ${
-                        message.includes("Increíble")
-                          ? "bg-green-100 text-green-800 border border-green-200"
-                          : "bg-red-100 text-red-800 border border-red-200"
-                      }`}
-                    >
-                      {message.replace("libertad financiera", "educación financiera")}
-                    </div>
-                  )}
-                </form>
-              </CardContent>
-            </Card>
-          </div>
-        </section>
-      </main>
-
-      {/* Footer */}
-      <footer className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-cyan-600/10"></div>
-        <div className="w-full max-w-7xl mx-auto px-4 md:px-6 relative z-10">
-          <div className="grid md:grid-cols-4 gap-12 mb-12">
-            <div className="md:col-span-2">
-              <div className="flex items-center gap-3 mb-6">
-                <Image
-                  src="https://socialmediamkt.softwarenicaragua.com/wp-content/uploads/2025/08/logo-investi-blanco.png"
-                  alt="Investï Community"
-                  width={150}
-                  height={40}
-                  className="h-10 w-auto"
-                />
-                <Badge className="bg-blue-600 text-white">Beta</Badge>
-              </div>
-              <p className="text-gray-300 mb-6 text-lg leading-relaxed">
-                La primera red social de educación financiera potenciada con IA. Conecta, aprende y crece junto a miles
-                de inversionistas en todo el mundo.
-              </p>
-              <div className="flex gap-4">
-                <Button
-                  size="lg"
-                  variant="ghost"
-                  className="text-gray-300 hover:text-white hover:bg-white/10 rounded-full p-3"
-                  onClick={() => window.open("https://www.instagram.com/investi_chile", "_blank")}
-                >
-                  <Instagram className="h-6 w-6" />
-                </Button>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-gray-700 italic">"{testimonial.content}"</p>
+                    </CardContent>
+                  </Card>
+                ))}
               </div>
             </div>
+          </section>
 
-            <div>
-              <h3 className="font-bold text-xl mb-6 text-white">Producto</h3>
-              <ul className="space-y-4 text-gray-300">
-                <li>
-                  <button
-                    onClick={() => scrollToSection("features")}
-                    className="hover:text-white transition-colors text-left hover:translate-x-2 transform duration-200"
-                  >
-                    → Características
-                  </button>
-                </li>
-                <li>
-                  <button
-                    onClick={() => scrollToSection("community")}
-                    className="hover:text-white transition-colors text-left hover:translate-x-2 transform duration-200"
-                  >
-                    → Comunidades
-                  </button>
-                </li>
-                <li>
-                  <button
-                    onClick={() => setIsChatOpen(true)}
-                    className="hover:text-white transition-colors text-left hover:translate-x-2 transform duration-200"
-                  >
-                    → IA Mentor
-                  </button>
-                </li>
-                <li>
-                  <button
-                    onClick={() => scrollToSection("features")}
-                    className="hover:text-white transition-colors text-left hover:translate-x-2 transform duration-200"
-                  >
-                    → Educación
-                  </button>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="font-bold text-xl mb-6 text-white">Soporte</h3>
-              <ul className="space-y-4 text-gray-300">
-                <li>
-                  <Link
-                    href="/ayuda"
-                    className="hover:text-white transition-colors hover:translate-x-2 transform duration-200 inline-block"
-                  >
-                    → Centro de Ayuda
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/contacto"
-                    className="hover:text-white transition-colors hover:translate-x-2 transform duration-200 inline-block"
-                  >
-                    → Contacto
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/terminos"
-                    className="hover:text-white transition-colors hover:translate-x-2 transform duration-200 inline-block"
-                  >
-                    → Términos
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/privacidad"
-                    className="hover:text-white transition-colors hover:translate-x-2 transform duration-200 inline-block"
-                  >
-                    → Privacidad
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="border-t border-gray-700 pt-8">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-              <p className="text-gray-400">
-                &copy; {new Date().getFullYear()} Investï SpA. Todos los derechos reservados.
-              </p>
-              <div className="flex items-center gap-4">
-                <Badge variant="outline" className="border-blue-500 text-blue-400">
-                  🚀 Beta Disponible
-                </Badge>
-                <Button
-                  size="sm"
-                  className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700"
-                  onClick={() => scrollToSection("register")}
-                >
-                  Únete Ahora
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
-
-      {/* AI Chat Widget */}
-      {isChatOpen && (
-        <div className="fixed bottom-4 right-4 w-96 h-[600px] bg-white rounded-2xl shadow-2xl border z-50 flex flex-col">
-          <div className="bg-white text-gray-900 p-4 rounded-t-2xl flex items-center justify-between border-b">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 flex items-center justify-center">
-                <Image
-                  src="https://socialmediamkt.softwarenicaragua.com/wp-content/uploads/2025/08/iri-icono-Sin-fondo.gif"
-                  alt="Irï Icon"
-                  width={32}
-                  height={32}
-                  unoptimized
-                />
-              </div>
-              <div>
-                <h3 className="font-semibold text-gray-900">Irï - Tu Mentor IA</h3>
-                <p className="text-xs text-gray-600 flex items-center gap-1">
-                  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                  En línea
+          {/* Roadmap Section */}
+          <section id="roadmap" className="w-full py-20 md:py-32 bg-white">
+            <div className="w-full max-w-7xl mx-auto px-4 md:px-6">
+              <div className="text-center mb-16">
+                <Badge className="bg-indigo-100 text-indigo-700 px-4 py-2 text-sm font-medium mb-4">🗺️ Roadmap</Badge>
+                <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6">
+                  El <span className="text-indigo-600">Futuro</span> de Investï: Tu Camino a la Educación Financiera
+                </h2>
+                <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                  Conoce nuestros planes y únete desde el principio para ser parte de esta revolución financiera.
                 </p>
               </div>
-            </div>
-            <Button
-              size="sm"
-              variant="ghost"
-              className="text-gray-600 hover:bg-gray-100"
-              onClick={() => setIsChatOpen(false)}
-            >
-              <X className="h-4 w-4" />
-            </Button>
-          </div>
 
-          <div className="flex-1 overflow-y-auto p-3 md:p-4 space-y-4 bg-gray-50 max-h-[60vh] md:max-h-[70vh]">
-            {chatMessages.map((msg) => (
-              <div key={msg.id} className={`flex ${msg.isBot ? "justify-start" : "justify-end"}`}>
-                <div
-                  className={`max-w-[90%] md:max-w-[85%] p-2 md:p-3 rounded-2xl text-sm md:text-base ${
-                    msg.isBot
-                      ? "bg-white text-gray-900 shadow-sm border"
-                      : "bg-gradient-to-r from-blue-600 to-cyan-600 text-white"
-                  }`}
-                >
-                  {msg.typing ? (
-                    <div className="flex gap-1 py-2">
-                      <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-                      <div
-                        className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
-                        style={{ animationDelay: "0.1s" }}
-                      ></div>
-                      <div
-                        className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
-                        style={{ animationDelay: "0.2s" }}
-                      ></div>
-                    </div>
-                  ) : (
-                    <>
-                      <p className="text-sm leading-relaxed">{msg.text}</p>
-                      <p className={`text-xs mt-2 ${msg.isBot ? "text-gray-500" : "text-white/70"}`}>
-                        {msg.timestamp.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
-                      </p>
-                    </>
-                  )}
-                </div>
-              </div>
-            ))}
-
-            {/* Quick Actions */}
-            {showQuickActions && chatMessages.length === 1 && (
-              <div className="space-y-2">
-                <p className="text-xs text-gray-500 text-center">Preguntas frecuentes:</p>
-                <div className="grid grid-cols-2 gap-2">
-                  {quickActions.map((action, index) => (
-                    <Button
-                      key={index}
-                      variant="outline"
-                      size="sm"
-                      className="text-xs h-8 bg-white hover:bg-blue-50 border-blue-200"
-                      onClick={action.action}
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                {roadmapItems.map((item, index) => (
+                  <Card
+                    key={index}
+                    className={`group hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 border-0 relative overflow-hidden ${
+                      item.status === "current"
+                        ? "bg-gradient-to-br from-blue-600 to-cyan-600 text-white"
+                        : "bg-white hover:bg-gray-50"
+                    }`}
+                  >
+                    <div
+                      className={`absolute top-4 right-4 w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl ${
+                        item.status === "current" ? "bg-white/20 text-white" : "bg-blue-100 text-blue-600"
+                      }`}
                     >
-                      {action.text}
-                    </Button>
-                  ))}
+                      {index + 1}
+                    </div>
+
+                    <CardHeader className="pb-4 pt-6">
+                      <Badge
+                        className={`w-fit mb-2 ${
+                          item.status === "current" ? "bg-white/20 text-white" : "bg-blue-100 text-blue-700"
+                        }`}
+                      >
+                        {item.date}
+                      </Badge>
+                      <CardTitle
+                        className={`text-xl font-bold ${
+                          item.status === "current" ? "text-white" : "text-gray-900 group-hover:text-blue-600"
+                        }`}
+                      >
+                        {item.title}
+                      </CardTitle>
+                    </CardHeader>
+
+                    <CardContent>
+                      <p
+                        className={`text-sm leading-relaxed ${
+                          item.status === "current" ? "text-white/90" : "text-gray-600"
+                        }`}
+                      >
+                        {item.description}
+                      </p>
+                      {item.status === "current" && (
+                        <Badge className="bg-green-400 text-green-900 mt-4">¡En Progreso!</Badge>
+                      )}
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Registration Section */}
+          <section
+            id="register"
+            className="w-full py-20 md:py-32 bg-gradient-to-br from-blue-600 via-cyan-600 to-indigo-600 text-white relative overflow-hidden"
+          >
+            <div className="absolute inset-0 bg-black/20"></div>
+            <div className="w-full max-w-7xl mx-auto px-4 md:px-6 relative z-10">
+              <div className="max-w-4xl mx-auto text-center mb-12">
+                <Badge className="bg-white/20 text-white px-4 py-2 text-sm font-medium mb-4">
+                  🎯 Acceso Beta Exclusivo
+                </Badge>
+                <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6">
+                  ¡Asegura tu Lugar en la <span className="text-yellow-300">Revolución!</span>
+                </h2>
+                <p className="text-xl leading-relaxed opacity-90 mb-8">
+                  Solo los primeros 1,000 usuarios tendrán acceso beta ANTICIPADO. No pierdas esta oportunidad única de
+                  ser pionero en el futuro de las finanzas.
+                </p>
+                <div className="flex flex-wrap justify-center gap-8 text-lg font-semibold">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="h-6 w-6 text-green-300" />
+                    <span>Acceso Beta ANTICIPADO</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="h-6 w-6 text-green-300" />
+                    <span>Acceso Prioritario</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Award className="h-6 w-6 text-green-300" />
+                    <span>Badge de Beta Tester Oficial</span>
+                  </div>
                 </div>
               </div>
-            )}
 
-            <div ref={chatEndRef} />
+              <Card className="max-w-3xl mx-auto p-8 bg-white/95 backdrop-blur-sm text-gray-900 shadow-2xl">
+                <CardHeader className="text-center pb-6">
+                  <CardTitle className="text-3xl font-bold mb-2">Registro Beta Exclusivo</CardTitle>
+                  <CardDescription className="text-lg text-gray-600">
+                    Completa el formulario y recibe tu invitación en 24-48 horas
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <form onSubmit={handleSubmit} className="space-y-8">
+                    {/* Personal Information */}
+                    <div className="bg-gray-50 p-6 rounded-xl space-y-6">
+                      <h3 className="text-xl font-semibold text-gray-900 mb-4">Información Personal</h3>
+                      <div className="grid md:grid-cols-2 gap-6">
+                        <div>
+                          <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                            Nombre Completo *
+                          </label>
+                          <Input
+                            id="name"
+                            type="text"
+                            placeholder="Tu nombre completo"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            required
+                            className="h-12 text-base"
+                          />
+                        </div>
+                        <div>
+                          <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                            Correo Electrónico *
+                          </label>
+                          <Input
+                            id="email"
+                            type="email"
+                            placeholder="tu@email.com"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                            className="h-12 text-base"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="grid md:grid-cols-2 gap-6">
+                        <div>
+                          <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+                            Teléfono (Opcional)
+                          </label>
+                          <Input
+                            id="phone"
+                            type="tel"
+                            placeholder="+56 9 1234 5678"
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
+                            className="h-12 text-base"
+                          />
+                        </div>
+                        <div>
+                          <label htmlFor="age" className="block text-sm font-medium text-gray-700 mb-2">
+                            Rango de Edad *
+                          </label>
+                          <Select onValueChange={setAge} value={age} required>
+                            <SelectTrigger className="h-12 text-base">
+                              <SelectValue placeholder="Selecciona tu edad" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="18-25">18-25 años</SelectItem>
+                              <SelectItem value="26-35">26-35 años</SelectItem>
+                              <SelectItem value="36-45">36-45 años</SelectItem>
+                              <SelectItem value="46-55">46-55 años</SelectItem>
+                              <SelectItem value="56-65">56-65 años</SelectItem>
+                              <SelectItem value="65+">65+ años</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Goals Section */}
+                    <div className="bg-blue-50 p-6 rounded-xl space-y-4">
+                      <h3 className="text-xl font-semibold text-gray-900 mb-4">Tus Objetivos Financieros</h3>
+                      <label className="block text-sm font-medium text-gray-700 mb-3">
+                        ¿Qué esperas lograr con Investï? (Puedes seleccionar varios) *
+                      </label>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                        {userGoals.map((goal) => (
+                          <Button
+                            key={goal}
+                            type="button"
+                            variant={selectedGoals.includes(goal) ? "default" : "outline"}
+                            className={`h-auto py-3 px-3 text-xs font-medium transition-all duration-200 text-center whitespace-normal leading-tight ${
+                              selectedGoals.includes(goal)
+                                ? "bg-blue-600 text-white shadow-md transform scale-105"
+                                : "border-gray-300 text-gray-700 hover:bg-blue-50 hover:border-blue-300"
+                            }`}
+                            onClick={() => handleGoalChange(goal)}
+                          >
+                            {goal}
+                          </Button>
+                        ))}
+                      </div>
+                      {selectedGoals.length === 0 && (
+                        <p className="text-red-500 text-sm mt-2 flex items-center gap-2">
+                          <span className="w-2 h-2 bg-red-500 rounded-full"></span>
+                          Por favor, selecciona al menos una meta.
+                        </p>
+                      )}
+                    </div>
+
+                    {/* Interests Section */}
+                    <div className="bg-green-50 p-6 rounded-xl space-y-4">
+                      <h3 className="text-xl font-semibold text-gray-900 mb-4">Tus Intereses de Aprendizaje</h3>
+                      <label className="block text-sm font-medium text-gray-700 mb-3">
+                        ¿Qué te gustaría aprender o en qué te interesa invertir? (Puedes seleccionar varios) *
+                      </label>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                        {learningInterests.map((interest) => (
+                          <Button
+                            key={interest}
+                            type="button"
+                            variant={selectedInterests.includes(interest) ? "default" : "outline"}
+                            className={`h-auto py-3 px-3 text-xs font-medium transition-all duration-200 text-center whitespace-normal leading-tight ${
+                              selectedInterests.includes(interest)
+                                ? "bg-green-600 text-white shadow-md transform scale-105"
+                                : "border-gray-300 text-gray-700 hover:bg-green-50 hover:border-green-300"
+                            }`}
+                            onClick={() => handleInterestChange(interest)}
+                          >
+                            {interest}
+                          </Button>
+                        ))}
+                      </div>
+                      {selectedInterests.length === 0 && (
+                        <p className="text-red-500 text-sm mt-2 flex items-center gap-2">
+                          <span className="w-2 h-2 bg-red-500 rounded-full"></span>
+                          Por favor, selecciona al menos un interés.
+                        </p>
+                      )}
+                    </div>
+
+                    {/* Terms and Conditions */}
+                    <div className="bg-gray-50 p-6 rounded-xl">
+                      <div className="flex items-start space-x-3">
+                        <Checkbox
+                          id="terms"
+                          checked={acceptTerms}
+                          onCheckedChange={(checked) => setAcceptTerms(checked as boolean)}
+                          className="mt-1"
+                        />
+                        <div className="text-sm text-gray-700 leading-relaxed">
+                          <label htmlFor="terms" className="cursor-pointer">
+                            Acepto los{" "}
+                            <Link
+                              href="/terminos"
+                              className="text-blue-600 hover:underline font-medium"
+                              target="_blank"
+                            >
+                              Términos y Condiciones
+                            </Link>{" "}
+                            y la{" "}
+                            <Link
+                              href="/privacidad"
+                              className="text-blue-600 hover:underline font-medium"
+                              target="_blank"
+                            >
+                              Política de Privacidad
+                            </Link>{" "}
+                            de Investï. Entiendo que mis datos serán utilizados para contactarme sobre el programa beta
+                            y que recibiré comunicaciones relacionadas con la plataforma. *
+                          </label>
+                        </div>
+                      </div>
+                      {!acceptTerms && (
+                        <p className="text-red-500 text-sm mt-2 ml-6 flex items-center gap-2">
+                          <span className="w-2 h-2 bg-red-500 rounded-full"></span>
+                          Debes aceptar los términos y condiciones para continuar.
+                        </p>
+                      )}
+                    </div>
+
+                    <Button
+                      type="submit"
+                      className="w-full h-16 text-xl bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white shadow-xl transition-all duration-300 transform hover:scale-105 font-bold"
+                      disabled={
+                        isSubmitting ||
+                        selectedGoals.length === 0 ||
+                        selectedInterests.length === 0 ||
+                        !age ||
+                        !acceptTerms
+                      }
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white mr-3"></div>
+                          Procesando tu Registro...
+                        </>
+                      ) : (
+                        <>
+                          <Rocket className="mr-3 h-6 w-6" />
+                          ¡Quiero Mi Acceso Beta ANTICIPADO!
+                        </>
+                      )}
+                    </Button>
+
+                    {message && (
+                      <div
+                        className={`mt-6 p-6 rounded-xl text-center text-lg font-medium ${
+                          message.includes("Increíble")
+                            ? "bg-green-100 text-green-800 border border-green-200"
+                            : "bg-red-100 text-red-800 border border-red-200"
+                        }`}
+                      >
+                        {message.replace("libertad financiera", "educación financiera")}
+                      </div>
+                    )}
+                  </form>
+                </CardContent>
+              </Card>
+            </div>
+          </section>
+        </main>
+
+        {/* Footer */}
+        <footer className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white py-20 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-cyan-600/10"></div>
+          <div className="w-full max-w-7xl mx-auto px-4 md:px-6 relative z-10">
+            <div className="grid md:grid-cols-4 gap-12 mb-12">
+              <div className="md:col-span-2">
+                <div className="flex items-center gap-3 mb-6">
+                  <Image
+                    src="https://socialmediamkt.softwarenicaragua.com/wp-content/uploads/2025/08/logo-investi-blanco.png"
+                    alt="Investï Community"
+                    width={150}
+                    height={40}
+                    className="h-10 w-auto"
+                  />
+                  <Badge className="bg-blue-600 text-white">Beta</Badge>
+                </div>
+                <p className="text-gray-300 mb-6 text-lg leading-relaxed">
+                  La primera red social de educación financiera potenciada con IA. Conecta, aprende y crece junto a
+                  miles de inversionistas en todo el mundo.
+                </p>
+                <div className="flex gap-4">
+                  <Button
+                    size="lg"
+                    variant="ghost"
+                    className="text-gray-300 hover:text-white hover:bg-white/10 rounded-full p-3"
+                    onClick={() => window.open("https://www.instagram.com/investi_chile", "_blank")}
+                  >
+                    <Instagram className="h-6 w-6" />
+                  </Button>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="font-bold text-xl mb-6 text-white">Producto</h3>
+                <ul className="space-y-4 text-gray-300">
+                  <li>
+                    <button
+                      onClick={() => scrollToSection("features")}
+                      className="hover:text-white transition-colors text-left hover:translate-x-2 transform duration-200"
+                    >
+                      → Características
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      onClick={() => scrollToSection("community")}
+                      className="hover:text-white transition-colors text-left hover:translate-x-2 transform duration-200"
+                    >
+                      → Comunidades
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      onClick={() => setIsChatOpen(true)}
+                      className="hover:text-white transition-colors text-left hover:translate-x-2 transform duration-200"
+                    >
+                      → IA Mentor
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      onClick={() => scrollToSection("features")}
+                      className="hover:text-white transition-colors text-left hover:translate-x-2 transform duration-200"
+                    >
+                      → Educación
+                    </button>
+                  </li>
+                </ul>
+              </div>
+
+              <div>
+                <h3 className="font-bold text-xl mb-6 text-white">Soporte</h3>
+                <ul className="space-y-4 text-gray-300">
+                  <li>
+                    <Link
+                      href="/ayuda"
+                      className="hover:text-white transition-colors hover:translate-x-2 transform duration-200 inline-block"
+                    >
+                      → Centro de Ayuda
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/contacto"
+                      className="hover:text-white transition-colors hover:translate-x-2 transform duration-200 inline-block"
+                    >
+                      → Contacto
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/terminos"
+                      className="hover:text-white transition-colors hover:translate-x-2 transform duration-200 inline-block"
+                    >
+                      → Términos
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/privacidad"
+                      className="hover:text-white transition-colors hover:translate-x-2 transform duration-200 inline-block"
+                    >
+                      → Privacidad
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="border-t border-gray-700 pt-8">
+              <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+                <p className="text-gray-400">
+                  &copy; {new Date().getFullYear()} Investï SpA. Todos los derechos reservados.
+                </p>
+                <div className="flex items-center gap-4">
+                  <Badge variant="outline" className="border-blue-500 text-blue-400">
+                    🚀 Beta Disponible
+                  </Badge>
+                  <Button
+                    size="sm"
+                    className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700"
+                    onClick={() => scrollToSection("register")}
+                  >
+                    Únete Ahora
+                  </Button>
+                </div>
+              </div>
+            </div>
           </div>
+        </footer>
 
-          <form onSubmit={handleChatSubmit} className="p-4 border-t bg-white">
-            <div className="flex gap-2">
-              <Input
-                value={chatInput}
-                onChange={(e) => setChatInput(e.target.value)}
-                placeholder="Escribe tu pregunta..."
-                className="flex-1 h-10"
-                disabled={isTyping}
-              />
+        {/* AI Chat Widget */}
+        {isChatOpen && (
+          <div className="fixed bottom-4 right-4 w-96 h-[600px] bg-white rounded-2xl shadow-2xl border z-50 flex flex-col">
+            <div className="bg-white text-gray-900 p-4 rounded-t-2xl flex items-center justify-between border-b">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 flex items-center justify-center">
+                  <Image
+                    src="https://socialmediamkt.softwarenicaragua.com/wp-content/uploads/2025/08/iri-icono-Sin-fondo.gif"
+                    alt="Irï Icon"
+                    width={32}
+                    height={32}
+                    unoptimized
+                  />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-900">Irï - Tu Mentor IA</h3>
+                  <p className="text-xs text-gray-600 flex items-center gap-1">
+                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                    En línea
+                  </p>
+                </div>
+              </div>
               <Button
-                type="submit"
                 size="sm"
-                disabled={isTyping || !chatInput.trim()}
-                className="bg-blue-600 hover:bg-blue-700 px-3"
+                variant="ghost"
+                className="text-gray-600 hover:bg-gray-100"
+                onClick={() => setIsChatOpen(false)}
               >
-                <Send className="h-4 w-4" />
+                <X className="h-4 w-4" />
               </Button>
             </div>
-            <p className="text-xs text-gray-500 mt-2 text-center">Irï está aquí para ayudarte 24/7 ✨</p>
-          </form>
-        </div>
-      )}
 
-      {/* Floating Chat Button */}
-      {!isChatOpen && (
-        <button
-          className="fixed bottom-6 right-6 w-20 h-20 z-40 animate-pulse flex items-center justify-center bg-transparent"
-          onClick={() => setIsChatOpen(true)}
-        >
-          <Image
-            src="https://socialmediamkt.softwarenicaragua.com/wp-content/uploads/2025/08/iri-icono-Sin-fondo.gif"
-            alt="Chat with Irï"
-            width={80}
-            height={80}
-            unoptimized
-            className=""
-          />
-        </button>
-      )}
+            <div className="flex-1 overflow-y-auto p-3 md:p-4 space-y-4 bg-gray-50 max-h-[60vh] md:max-h-[70vh]">
+              {chatMessages.map((msg) => (
+                <div key={msg.id} className={`flex ${msg.isBot ? "justify-start" : "justify-end"}`}>
+                  <div
+                    className={`max-w-[90%] md:max-w-[85%] p-2 md:p-3 rounded-2xl text-sm md:text-base ${
+                      msg.isBot
+                        ? "bg-white text-gray-900 shadow-sm border"
+                        : "bg-gradient-to-r from-blue-600 to-cyan-600 text-white"
+                    }`}
+                  >
+                    {msg.typing ? (
+                      <div className="flex gap-1 py-2">
+                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                        <div
+                          className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+                          style={{ animationDelay: "0.1s" }}
+                        ></div>
+                        <div
+                          className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+                          style={{ animationDelay: "0.2s" }}
+                        ></div>
+                      </div>
+                    ) : (
+                      <>
+                        <p className="text-sm leading-relaxed">{msg.text}</p>
+                        <p className={`text-xs mt-2 ${msg.isBot ? "text-gray-500" : "text-white/70"}`}>
+                          {msg.timestamp.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+                        </p>
+                      </>
+                    )}
+                  </div>
+                </div>
+              ))}
 
-      <style jsx>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-20px); }
-        }
-        .animate-float {
-          animation: float 6s ease-in-out infinite;
-        }
-        .bg-grid-pattern {
-          background-image: radial-gradient(circle, #e5e7eb 1px, transparent 1px);
-          background-size: 20px 20px;
-        }
-      `}</style>
-    </div>
+              {/* Quick Actions */}
+              {showQuickActions && chatMessages.length === 1 && (
+                <div className="space-y-2">
+                  <p className="text-xs text-gray-500 text-center">Preguntas frecuentes:</p>
+                  <div className="grid grid-cols-2 gap-2">
+                    {quickActions.map((action, index) => (
+                      <Button
+                        key={index}
+                        variant="outline"
+                        size="sm"
+                        className="text-xs h-8 bg-white hover:bg-blue-50 border-blue-200"
+                        onClick={action.action}
+                      >
+                        {action.text}
+                      </Button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              <div ref={chatEndRef} />
+            </div>
+
+            <form onSubmit={handleChatSubmit} className="p-4 border-t bg-white">
+              <div className="flex gap-2">
+                <Input
+                  value={chatInput}
+                  onChange={(e) => setChatInput(e.target.value)}
+                  placeholder="Escribe tu pregunta..."
+                  className="flex-1 h-10"
+                  disabled={isTyping}
+                />
+                <Button
+                  type="submit"
+                  size="sm"
+                  disabled={isTyping || !chatInput.trim()}
+                  className="bg-blue-600 hover:bg-blue-700 px-3"
+                >
+                  <Send className="h-4 w-4" />
+                </Button>
+              </div>
+              <p className="text-xs text-gray-500 mt-2 text-center">Irï está aquí para ayudarte 24/7 ✨</p>
+            </form>
+          </div>
+        )}
+
+        {/* Floating Chat Button */}
+        {!isChatOpen && (
+          <button
+            className="fixed bottom-6 right-6 w-20 h-20 z-40 animate-pulse flex items-center justify-center bg-transparent"
+            onClick={() => setIsChatOpen(true)}
+          >
+            <Image
+              src="https://socialmediamkt.softwarenicaragua.com/wp-content/uploads/2025/08/iri-icono-Sin-fondo.gif"
+              alt="Chat with Irï"
+              width={80}
+              height={80}
+              unoptimized
+              className=""
+            />
+          </button>
+        )}
+
+        <style jsx>{`
+          @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+          }
+          .animate-float {
+            animation: float 6s ease-in-out infinite;
+          }
+          .bg-grid-pattern {
+            background-image: radial-gradient(circle, #e5e7eb 1px, transparent 1px);
+            background-size: 20px 20px;
+          }
+        `}</style>
+      </div>
+    </>
   )
 }
