@@ -1408,8 +1408,8 @@ export default function InvestiLandingPage() {
                 </div>
                 <div className="flex items-center gap-2 text-gray-300">
                   <Mail className="h-5 w-5" />
-                  <a href="mailto:Contacto@investiiapp.com" className="hover:text-white transition-colors">
-                    Contacto@investiiapp.com
+                  <a href="mailto:contacto@investiiapp.com" className="hover:text-white transition-colors">
+                    contacto@investiiapp.com
                   </a>
                 </div>
               </div>
