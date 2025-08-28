@@ -27,6 +27,8 @@ import {
   ChevronDown,
   ChevronUp,
   HelpCircle,
+  Linkedin,
+  Mail,
 } from "lucide-react"
 import { useState, useEffect, useRef } from "react"
 
@@ -824,7 +826,7 @@ export default function InvestiLandingPage() {
           <section id="community" className="w-full py-20 md:py-32 bg-white">
             <div className="w-full max-w-7xl mx-auto px-4 md:px-6">
               <div className="text-center mb-16">
-                <Badge className="bg-blue-100 text-blue-700 px-4 py-2 text-sm font-medium mb-4">🌟 Comunidad</Badge>
+                <Badge className="bg-blue-100 text-blue-700 px-4 py-2 text-sm font-medium mb-4">Comunidad</Badge>
                 <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6">
                   Conecta con <span className="text-blue-600">tus intereses</span>
                 </h2>
@@ -967,35 +969,79 @@ export default function InvestiLandingPage() {
                 </h2>
               </div>
 
-              <div className="grid md:grid-cols-3 gap-8">
-                {testimonials.map((testimonial, index) => (
-                  <Card key={index} className="bg-white border-0 shadow-lg hover:shadow-xl transition-all duration-300">
-                    <CardHeader>
-                      <div className="flex items-center gap-4">
-                        <Image
-                          src={testimonial.avatar || "/placeholder.svg"}
-                          width={60}
-                          height={60}
-                          alt={testimonial.name}
-                          className="rounded-full"
-                          unoptimized
-                        />
-                        <div>
-                          <h3 className="font-semibold text-lg">{testimonial.name}</h3>
-                          <p className="text-gray-600">{testimonial.role}</p>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                {testimonials.map((testimonial, index) => {
+                  const colors = [
+                    "from-yellow-400 to-yellow-500",
+                    "from-cyan-400 to-cyan-500",
+                    "from-blue-800 to-blue-900",
+                    "from-teal-400 to-teal-500",
+                    "from-amber-400 to-amber-500",
+                    "from-indigo-600 to-indigo-700",
+                  ]
+                  const textColors = [
+                    "text-gray-800",
+                    "text-white",
+                    "text-white",
+                    "text-white",
+                    "text-gray-800",
+                    "text-white",
+                  ]
+
+                  return (
+                    <div key={index} className="relative">
+                      {/* Speech bubble */}
+                      <div
+                        className={`relative bg-gradient-to-br ${colors[index % colors.length]} p-6 rounded-3xl shadow-lg transform hover:scale-105 transition-all duration-300`}
+                      >
+                        {/* Quote marks */}
+                        <div className={`text-4xl ${textColors[index % textColors.length]} opacity-50 mb-2`}>"</div>
+
+                        {/* Testimonial content */}
+                        <p
+                          className={`${textColors[index % textColors.length]} text-sm leading-relaxed mb-4 font-medium`}
+                        >
+                          {testimonial.content}
+                        </p>
+
+                        {/* Closing quote */}
+                        <div
+                          className={`text-4xl ${textColors[index % textColors.length]} opacity-50 text-right -mt-6`}
+                        >
+                          "
+                        </div>
+
+                        {/* Speech bubble tail */}
+                        <div
+                          className={`absolute -bottom-3 left-8 w-6 h-6 bg-gradient-to-br ${colors[index % colors.length]} transform rotate-45`}
+                        ></div>
+                      </div>
+
+                      {/* Avatar and name */}
+                      <div className="flex items-center mt-6 ml-4">
+                        <div className="relative">
+                          <Image
+                            src={testimonial.avatar || "/placeholder.svg?height=50&width=50&query=professional avatar"}
+                            width={50}
+                            height={50}
+                            alt={testimonial.name}
+                            className="rounded-full border-4 border-white shadow-lg"
+                            unoptimized
+                          />
+                        </div>
+                        <div className="ml-4">
+                          <h3 className="font-bold text-gray-800">{testimonial.name}</h3>
+                          <p className="text-gray-600 text-sm">{testimonial.role}</p>
+                          <div className="flex gap-1 mt-1">
+                            {[...Array(testimonial.rating)].map((_, i) => (
+                              <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                            ))}
+                          </div>
                         </div>
                       </div>
-                      <div className="flex gap-1">
-                        {[...Array(testimonial.rating)].map((_, i) => (
-                          <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
-                        ))}
-                      </div>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-gray-700 italic">"{testimonial.content}"</p>
-                    </CardContent>
-                  </Card>
-                ))}
+                    </div>
+                  )
+                })}
               </div>
             </div>
           </section>
@@ -1342,7 +1388,7 @@ export default function InvestiLandingPage() {
                   La primera red social de educación financiera potenciada con IA. Conecta, aprende y crece junto a
                   miles de inversionistas en todo el mundo.
                 </p>
-                <div className="flex gap-4">
+                <div className="flex gap-4 mb-6">
                   <Button
                     size="lg"
                     variant="ghost"
@@ -1351,6 +1397,20 @@ export default function InvestiLandingPage() {
                   >
                     <Instagram className="h-6 w-6" />
                   </Button>
+                  <Button
+                    size="lg"
+                    variant="ghost"
+                    className="text-gray-300 hover:text-white hover:bg-white/10 rounded-full p-3"
+                    onClick={() => window.open("https://www.linkedin.com/company/108479098", "_blank")}
+                  >
+                    <Linkedin className="h-6 w-6" />
+                  </Button>
+                </div>
+                <div className="flex items-center gap-2 text-gray-300">
+                  <Mail className="h-5 w-5" />
+                  <a href="mailto:Contacto@investiiapp.com" className="hover:text-white transition-colors">
+                    Contacto@investiiapp.com
+                  </a>
                 </div>
               </div>
 
