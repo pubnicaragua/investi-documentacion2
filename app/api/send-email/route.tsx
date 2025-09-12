@@ -63,68 +63,13 @@ export async function POST(request: NextRequest) {
 
     console.log("[v0] Saved to Supabase successfully:", supabaseData)
 
-    // Enviar email con SendGrid
-    if (!SENDGRID_API_KEY) {
-      console.error("[v0] SendGrid API key not configured, skipping email")
-      return NextResponse.json(
-        {
-          success: true,
-          message: "Datos guardados correctamente (email no enviado - API key no configurada)",
-          data: supabaseData,
-        },
-        { status: 200 },
-      )
-    }
-
-    console.log("[v0] Sending email...")
-
-    const msg = {
-      to: "contacto@investiiapp.com",
-      from: {
-        email: "noreply@investiiapp.com", // Usar dominio verificado
-        name: "Investi Landing Page",
-      },
-      subject: `Nuevo registro en Investi - ${name}`,
-      html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #2563eb;">Nuevo Registro en Investi</h2>
-          
-          <div style="background: #f8fafc; padding: 20px; border-radius: 8px; margin: 20px 0;">
-            <h3 style="margin-top: 0; color: #1e293b;">Información del Usuario</h3>
-            <p><strong>Nombre:</strong> ${name}</p>
-            <p><strong>Email:</strong> ${email}</p>
-            <p><strong>Teléfono:</strong> ${phone || "No proporcionado"}</p>
-            <p><strong>Edad:</strong> ${age}</p>
-          </div>
-
-          <div style="background: #f0f9ff; padding: 20px; border-radius: 8px; margin: 20px 0;">
-            <h3 style="margin-top: 0; color: #1e293b;">Objetivos Financieros</h3>
-            <ul style="margin: 0; padding-left: 20px;">
-              ${Array.isArray(goals) ? goals.map((goal) => `<li>${goal}</li>`).join("") : `<li>${goals}</li>`}
-            </ul>
-          </div>
-
-          <div style="background: #f0fdf4; padding: 20px; border-radius: 8px; margin: 20px 0;">
-            <h3 style="margin-top: 0; color: #1e293b;">Intereses de Inversión</h3>
-            <ul style="margin: 0; padding-left: 20px;">
-              ${Array.isArray(interests) ? interests.map((interest) => `<li>${interest}</li>`).join("") : `<li>${interests}</li>`}
-            </ul>
-          </div>
-
-          <p style="color: #64748b; font-size: 14px; margin-top: 30px;">
-            Registro recibido el: ${new Date(timestamp || Date.now()).toLocaleString("es-ES")}
-          </p>
-        </div>
-      `,
-    }
-
-    await sgMail.send(msg)
-    console.log("[v0] Email sent successfully")
-
+    // Por ahora, solo guardar en Supabase sin enviar email
+    console.log("[v0] Skipping email sending due to SendGrid configuration issues")
+    
     return NextResponse.json(
       {
         success: true,
-        message: "Registro exitoso y email enviado",
+        message: "¡Registro exitoso! Nos pondremos en contacto contigo pronto.",
         data: supabaseData,
       },
       { status: 200 },

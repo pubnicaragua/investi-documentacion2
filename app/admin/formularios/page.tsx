@@ -7,18 +7,26 @@ import { Badge } from "@/components/ui/badge"
 
 interface Formulario {
   id: number
-  nombre: string
+  name: string
   email: string
-  telefono?: string
-  objetivo_financiero?: string
+  phone?: string
+  age?: string
+  goals?: string[]
+  interests?: string[]
+  timestamp: string
   created_at: string
+  updated_at: string
 }
 
 interface Estadisticas {
   total: number
   hoy: number
   esta_semana: number
+  este_mes: number
   objetivos: Record<string, number>
+  intereses: Record<string, number>
+  edades: Record<string, number>
+  conversion_rate: number
 }
 
 export default function FormulariosAdmin() {
@@ -79,43 +87,111 @@ export default function FormulariosAdmin() {
     <div className="min-h-screen bg-gray-50 p-4">
       <div className="max-w-7xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Panel de Formularios</h1>
-          <p className="text-gray-600 mt-2">Gestiona los registros de la landing page de Investi</p>
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">Panel de Formularios</h1>
+              <p className="text-gray-600 mt-2 text-lg">Gestiona los registros de la landing page de Investï</p>
+            </div>
+            <div className="text-right">
+              <Badge className="bg-gradient-to-r from-green-500 to-blue-500 text-white px-4 py-2">
+                🚀 Beta Activo
+              </Badge>
+            </div>
+          </div>
         </div>
 
         {/* Estadísticas */}
         {estadisticas && (
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-            <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="text-2xl font-bold text-blue-600">{estadisticas.total}</CardTitle>
-                <CardDescription>Total de registros</CardDescription>
-              </CardHeader>
-            </Card>
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+              <Card className="bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200">
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-3xl font-bold text-blue-700">{estadisticas.total}</CardTitle>
+                  <CardDescription className="text-blue-600 font-medium">Total de registros</CardDescription>
+                </CardHeader>
+              </Card>
 
-            <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="text-2xl font-bold text-green-600">{estadisticas.hoy}</CardTitle>
-                <CardDescription>Registros hoy</CardDescription>
-              </CardHeader>
-            </Card>
+              <Card className="bg-gradient-to-br from-green-50 to-green-100 border-green-200">
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-3xl font-bold text-green-700">{estadisticas.hoy}</CardTitle>
+                  <CardDescription className="text-green-600 font-medium">Registros hoy</CardDescription>
+                </CardHeader>
+              </Card>
 
-            <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="text-2xl font-bold text-purple-600">{estadisticas.esta_semana}</CardTitle>
-                <CardDescription>Esta semana</CardDescription>
-              </CardHeader>
-            </Card>
+              <Card className="bg-gradient-to-br from-purple-50 to-purple-100 border-purple-200">
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-3xl font-bold text-purple-700">{estadisticas.esta_semana}</CardTitle>
+                  <CardDescription className="text-purple-600 font-medium">Esta semana</CardDescription>
+                </CardHeader>
+              </Card>
 
-            <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="text-2xl font-bold text-orange-600">
-                  {Object.keys(estadisticas.objetivos).length}
-                </CardTitle>
-                <CardDescription>Objetivos únicos</CardDescription>
-              </CardHeader>
-            </Card>
-          </div>
+              <Card className="bg-gradient-to-br from-orange-50 to-orange-100 border-orange-200">
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-3xl font-bold text-orange-700">{estadisticas.este_mes}</CardTitle>
+                  <CardDescription className="text-orange-600 font-medium">Este mes</CardDescription>
+                </CardHeader>
+              </Card>
+            </div>
+
+            {/* Analytics Cards */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg font-semibold text-gray-800">Objetivos Más Populares</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    {Object.entries(estadisticas.objetivos)
+                      .sort(([,a], [,b]) => b - a)
+                      .slice(0, 5)
+                      .map(([objetivo, count]) => (
+                        <div key={objetivo} className="flex justify-between items-center">
+                          <span className="text-sm text-gray-600 truncate">{objetivo}</span>
+                          <Badge variant="secondary" className="ml-2">{count}</Badge>
+                        </div>
+                      ))}
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg font-semibold text-gray-800">Intereses de Inversión</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    {Object.entries(estadisticas.intereses)
+                      .sort(([,a], [,b]) => b - a)
+                      .slice(0, 5)
+                      .map(([interes, count]) => (
+                        <div key={interes} className="flex justify-between items-center">
+                          <span className="text-sm text-gray-600 truncate">{interes}</span>
+                          <Badge variant="outline" className="ml-2">{count}</Badge>
+                        </div>
+                      ))}
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg font-semibold text-gray-800">Distribución por Edad</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    {Object.entries(estadisticas.edades)
+                      .sort(([,a], [,b]) => b - a)
+                      .map(([edad, count]) => (
+                        <div key={edad} className="flex justify-between items-center">
+                          <span className="text-sm text-gray-600">{edad} años</span>
+                          <Badge variant="default" className="ml-2">{count}</Badge>
+                        </div>
+                      ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </>
         )}
 
         {/* Lista de formularios */}
@@ -127,23 +203,59 @@ export default function FormulariosAdmin() {
           <CardContent>
             <div className="space-y-4">
               {formularios.map((formulario) => (
-                <div key={formulario.id} className="border rounded-lg p-4 hover:bg-gray-50 transition-colors">
-                  <div className="flex justify-between items-start mb-2">
-                    <div>
-                      <h3 className="font-semibold text-lg">{formulario.nombre}</h3>
-                      <p className="text-gray-600">{formulario.email}</p>
+                <div key={formulario.id} className="border rounded-xl p-6 hover:bg-gray-50 transition-all duration-200 hover:shadow-md">
+                  <div className="flex justify-between items-start mb-4">
+                    <div className="flex-1">
+                      <h3 className="font-bold text-xl text-gray-900">{formulario.name}</h3>
+                      <p className="text-blue-600 font-medium">{formulario.email}</p>
+                      {formulario.phone && (
+                        <p className="text-gray-500 text-sm mt-1">📱 {formulario.phone}</p>
+                      )}
                     </div>
-                    <Badge variant="outline">{formatearFecha(formulario.created_at)}</Badge>
+                    <div className="text-right">
+                      <Badge variant="outline" className="mb-2">{formatearFecha(formulario.created_at)}</Badge>
+                      {formulario.age && (
+                        <p className="text-sm text-gray-500">{formulario.age} años</p>
+                      )}
+                    </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
-                    <div>
-                      <span className="text-sm font-medium text-gray-500">Teléfono:</span>
-                      <p className="text-sm">{formulario.telefono || "No proporcionado"}</p>
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-4">
+                    <div className="bg-blue-50 p-4 rounded-lg">
+                      <span className="text-sm font-semibold text-blue-700 mb-2 block">🎯 Objetivos Financieros:</span>
+                      <div className="flex flex-wrap gap-2">
+                        {formulario.goals && formulario.goals.length > 0 ? (
+                          formulario.goals.map((goal, index) => (
+                            <Badge key={index} variant="secondary" className="bg-blue-100 text-blue-800">
+                              {goal}
+                            </Badge>
+                          ))
+                        ) : (
+                          <span className="text-sm text-gray-500 italic">No especificado</span>
+                        )}
+                      </div>
                     </div>
-                    <div>
-                      <span className="text-sm font-medium text-gray-500">Objetivo:</span>
-                      <p className="text-sm">{formulario.objetivo_financiero || "No especificado"}</p>
+                    
+                    <div className="bg-green-50 p-4 rounded-lg">
+                      <span className="text-sm font-semibold text-green-700 mb-2 block">💡 Intereses de Inversión:</span>
+                      <div className="flex flex-wrap gap-2">
+                        {formulario.interests && formulario.interests.length > 0 ? (
+                          formulario.interests.map((interest, index) => (
+                            <Badge key={index} variant="outline" className="border-green-300 text-green-700">
+                              {interest}
+                            </Badge>
+                          ))
+                        ) : (
+                          <span className="text-sm text-gray-500 italic">No especificado</span>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mt-4 pt-4 border-t border-gray-200">
+                    <div className="flex justify-between items-center text-xs text-gray-500">
+                      <span>ID: {formulario.id}</span>
+                      <span>Actualizado: {formatearFecha(formulario.updated_at)}</span>
                     </div>
                   </div>
                 </div>

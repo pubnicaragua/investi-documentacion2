@@ -29,6 +29,7 @@ import {
   HelpCircle,
   Linkedin,
   Mail,
+  Menu,
 } from "lucide-react"
 import { useState, useEffect, useRef } from "react"
 
@@ -98,6 +99,8 @@ export default function InvestiLandingPage() {
   const [acceptTerms, setAcceptTerms] = useState(false)
   const [message, setMessage] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [showFloatingMessage, setShowFloatingMessage] = useState(true)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   // Chat state
   const [isChatOpen, setIsChatOpen] = useState(false)
@@ -330,9 +333,9 @@ export default function InvestiLandingPage() {
   }
 
   const stats = [
-    { number: "100K+", label: "Usuarios Registrados", icon: Users },
-    { number: "50+", label: "Comunidades Activas", icon: Share2 },
-    { number: "95%", label: "Satisfacción de Usuarios", icon: Star },
+    { number: "5K+", label: "Usuarios Registrados", icon: Users },
+    { number: "12+", label: "Comunidades Activas", icon: Share2 },
+    { number: "98%", label: "Satisfacción de Usuarios", icon: Star },
   ]
 
   const features = [
@@ -580,62 +583,165 @@ export default function InvestiLandingPage() {
       </Head>
 
       <div className="flex flex-col min-h-screen bg-white text-gray-900 relative">
+        <style jsx global>{`
+          @keyframes shimmer {
+            0% { transform: translateX(-100%) skewX(-12deg); }
+            100% { transform: translateX(200%) skewX(-12deg); }
+          }
+          .animate-shimmer {
+            animation: shimmer 2s infinite;
+          }
+          @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+          }
+          .animate-float {
+            animation: float 3s ease-in-out infinite;
+          }
+          @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.5); }
+            50% { box-shadow: 0 0 40px rgba(59, 130, 246, 0.8); }
+          }
+          .animate-glow {
+            animation: glow 2s ease-in-out infinite;
+          }
+        `}</style>
         {/* Header */}
-        <header className="px-4 lg:px-6 h-20 flex items-center justify-center bg-white/95 backdrop-blur-sm shadow-sm sticky top-0 z-40 border-b">
+        <header className="px-4 lg:px-6 h-20 flex items-center justify-center bg-gradient-to-r from-slate-900 via-blue-900 to-slate-900 backdrop-blur-sm shadow-xl sticky top-0 z-40 border-b border-blue-800/30">
           <div className="w-full max-w-7xl flex items-center justify-between">
-            <Link href="#" className="flex items-center gap-3">
-              <Image
-                src="/investi-logo-new-main.png"
-                alt="Investï - Plataforma de Educación Financiera"
-                width={150}
-                height={40}
-                className="h-10 w-auto"
-                priority
-              />
-              <Badge variant="secondary" className="bg-blue-100 text-blue-700">
+            <Link href="#" className="flex items-center gap-3 group">
+              <div className="relative">
+                <Image
+                  src="/investi-logo-new-main.png"
+                  alt="Investï - Plataforma de Educación Financiera"
+                  width={150}
+                  height={40}
+                  className="h-10 w-auto brightness-0 invert transition-all duration-300 group-hover:scale-105"
+                  priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300 rounded"></div>
+              </div>
+              <Badge variant="secondary" className="bg-gradient-to-r from-cyan-500 to-blue-500 text-white border-0 animate-pulse">
                 Beta
               </Badge>
             </Link>
             <nav className="hidden md:flex gap-8">
               <button
                 onClick={() => scrollToSection("features")}
-                className="text-sm font-medium hover:text-blue-600 transition-colors cursor-pointer"
+                className="text-sm font-medium text-white/90 hover:text-cyan-400 transition-all duration-300 cursor-pointer relative group"
+              >
+                Características
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-400 group-hover:w-full transition-all duration-300"></span>
+              </button>
+              <button
+                onClick={() => scrollToSection("community")}
+                className="text-sm font-medium text-white/90 hover:text-cyan-400 transition-all duration-300 cursor-pointer relative group"
+              >
+                Comunidad
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-400 group-hover:w-full transition-all duration-300"></span>
+              </button>
+              <button
+                onClick={() => scrollToSection("faq")}
+                className="text-sm font-medium text-white/90 hover:text-cyan-400 transition-all duration-300 cursor-pointer relative group"
+              >
+                FAQ
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-400 group-hover:w-full transition-all duration-300"></span>
+              </button>
+              <button
+                onClick={() => scrollToSection("roadmap")}
+                className="text-sm font-medium text-white/90 hover:text-cyan-400 transition-all duration-300 cursor-pointer relative group"
+              >
+                Roadmap
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-400 group-hover:w-full transition-all duration-300"></span>
+              </button>
+              <button
+                onClick={() => scrollToSection("testimonials")}
+                className="text-sm font-medium text-white/90 hover:text-cyan-400 transition-all duration-300 cursor-pointer relative group"
+              >
+                Testimonios
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-400 group-hover:w-full transition-all duration-300"></span>
+              </button>
+            </nav>
+            
+            {/* Mobile menu button */}
+            <button
+              className="md:hidden text-white p-2"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              <Menu className="h-6 w-6" />
+            </button>
+            
+            <Button
+              className="hidden md:flex bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white shadow-xl border-0 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl relative overflow-hidden group"
+              onClick={() => scrollToSection("register")}
+            >
+              <span className="relative z-10">¡Acceso Beta GRATIS!</span>
+              <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </Button>
+          </div>
+        </header>
+
+        {/* Mobile Navigation Menu */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden bg-slate-900 border-b border-blue-800/30 relative z-30">
+            <nav className="flex flex-col space-y-4 p-4">
+              <button
+                onClick={() => {
+                  scrollToSection("features")
+                  setIsMobileMenuOpen(false)
+                }}
+                className="text-left text-white/90 hover:text-cyan-400 transition-colors py-2"
               >
                 Características
               </button>
               <button
-                onClick={() => scrollToSection("community")}
-                className="text-sm font-medium hover:text-blue-600 transition-colors cursor-pointer"
+                onClick={() => {
+                  scrollToSection("community")
+                  setIsMobileMenuOpen(false)
+                }}
+                className="text-left text-white/90 hover:text-cyan-400 transition-colors py-2"
               >
                 Comunidad
               </button>
               <button
-                onClick={() => scrollToSection("faq")}
-                className="text-sm font-medium hover:text-blue-600 transition-colors cursor-pointer"
+                onClick={() => {
+                  scrollToSection("faq")
+                  setIsMobileMenuOpen(false)
+                }}
+                className="text-left text-white/90 hover:text-cyan-400 transition-colors py-2"
               >
                 FAQ
               </button>
               <button
-                onClick={() => scrollToSection("roadmap")}
-                className="text-sm font-medium hover:text-blue-600 transition-colors cursor-pointer"
+                onClick={() => {
+                  scrollToSection("roadmap")
+                  setIsMobileMenuOpen(false)
+                }}
+                className="text-left text-white/90 hover:text-cyan-400 transition-colors py-2"
               >
                 Roadmap
               </button>
               <button
-                onClick={() => scrollToSection("testimonials")}
-                className="text-sm font-medium hover:text-blue-600 transition-colors cursor-pointer"
+                onClick={() => {
+                  scrollToSection("testimonials")
+                  setIsMobileMenuOpen(false)
+                }}
+                className="text-left text-white/90 hover:text-cyan-400 transition-colors py-2"
               >
                 Testimonios
               </button>
+              <Button
+                className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white shadow-xl border-0 mt-4 w-full"
+                onClick={() => {
+                  scrollToSection("register")
+                  setIsMobileMenuOpen(false)
+                }}
+              >
+                ¡Acceso Beta GRATIS!
+              </Button>
             </nav>
-            <Button
-              className="bg-blue-600 hover:bg-blue-700 text-white shadow-lg"
-              onClick={() => scrollToSection("register")}
-            >
-              Regístrate Ahora
-            </Button>
           </div>
-        </header>
+        )}
 
         <main className="flex-1">
           {/* Hero Section */}
@@ -669,31 +775,31 @@ export default function InvestiLandingPage() {
                   <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center lg:justify-start">
                     <Button
                       size="lg"
-                      className="h-12 md:h-14 px-6 md:px-8 text-base md:text-lg bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white shadow-xl transition-all duration-300 transform hover:scale-105"
+                      className="h-14 md:h-16 px-8 md:px-12 text-lg md:text-xl font-bold bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-600 hover:from-cyan-600 hover:via-blue-700 hover:to-purple-700 text-white shadow-2xl transition-all duration-500 transform hover:scale-110 hover:shadow-cyan-500/25 relative overflow-hidden group animate-pulse hover:animate-none border-0 rounded-xl"
                       onClick={() => scrollToSection("register")}
                     >
-                      <span className="hidden sm:inline">Únete a la red social de educación financiera</span>
-                      <span className="sm:hidden">Únete a la red social</span>
+                      <span className="relative z-10 flex items-center gap-2">
+                        <Rocket className="h-5 w-5 md:h-6 md:w-6 animate-bounce" />
+                        <span className="hidden sm:inline">¡Quiero Mi Acceso Beta ANTICIPADO!</span>
+                        <span className="sm:hidden">¡Acceso Beta YA!</span>
+                        <Rocket className="h-5 w-5 md:h-6 md:w-6 animate-bounce" />
+                      </span>
+                      <div className="absolute inset-0 bg-gradient-to-r from-white/30 via-transparent to-white/30 -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shimmer"></div>
                     </Button>
-                    <Button
-                      variant="outline"
-                      size="lg"
-                      className="h-12 md:h-14 px-6 md:px-8 text-base md:text-lg border-2 border-blue-600 text-blue-600 hover:bg-blue-50 transition-all duration-300 transform hover:scale-105 bg-transparent"
-                      onClick={() => scrollToSection("features")}
-                    >
-                      <Play className="mr-2 h-4 w-4 md:h-5 md:w-5" />
-                      Ver Demo
-                    </Button>
+                    
                   </div>
 
                   <div className="grid grid-cols-3 gap-4 md:gap-6 pt-6 md:pt-8">
                     {stats.map((stat, index) => (
-                      <div key={index} className="text-center">
-                        <div className="flex justify-center mb-2">
-                          <stat.icon className="h-6 w-6 md:h-8 md:w-8 text-blue-600" />
+                      <div key={index} className="text-center group">
+                        <div className="flex justify-center mb-3">
+                          <div className="p-3 bg-gradient-to-r from-blue-100 to-cyan-100 rounded-full group-hover:from-blue-200 group-hover:to-cyan-200 transition-all duration-300 group-hover:scale-110 shadow-lg">
+                            <stat.icon className="h-6 w-6 md:h-8 md:w-8 text-blue-600 group-hover:text-blue-700 transition-colors duration-300" />
+                          </div>
                         </div>
-                        <div className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-900">{stat.number}</div>
-                        <div className="text-xs md:text-sm text-gray-600">{stat.label}</div>
+                        <div className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-300 mb-1">{stat.number}</div>
+                        <div className="text-xs md:text-sm text-gray-600 group-hover:text-gray-700 transition-colors duration-300 font-medium">{stat.label}</div>
                       </div>
                     ))}
                   </div>
@@ -1328,7 +1434,7 @@ export default function InvestiLandingPage() {
 
                     <Button
                       type="submit"
-                      className="w-full h-16 text-xl bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white shadow-xl transition-all duration-300 transform hover:scale-105 font-bold"
+                      className="w-full h-16 text-base sm:text-xl bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white shadow-xl transition-all duration-300 transform hover:scale-105 font-bold"
                       disabled={
                         isSubmitting ||
                         selectedGoals.length === 0 ||
@@ -1340,12 +1446,14 @@ export default function InvestiLandingPage() {
                       {isSubmitting ? (
                         <>
                           <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white mr-3"></div>
-                          Procesando tu Registro...
+                          <span className="hidden sm:inline">Procesando tu Registro...</span>
+                          <span className="sm:hidden">Procesando...</span>
                         </>
                       ) : (
                         <>
                           <Rocket className="mr-3 h-6 w-6" />
-                          ¡Quiero Mi Acceso Beta ANTICIPADO!
+                          <span className="hidden sm:inline">¡Quiero Mi Acceso Beta ANTICIPADO!</span>
+                          <span className="sm:hidden">¡Acceso Beta!</span>
                         </>
                       )}
                     </Button>
@@ -1625,21 +1733,60 @@ export default function InvestiLandingPage() {
           </div>
         )}
 
-        {/* Floating Chat Button */}
+        {/* Floating Chat Button with Message */}
         {!isChatOpen && (
-          <button
-            className="fixed bottom-6 right-6 w-20 h-20 z-40 animate-pulse flex items-center justify-center bg-transparent"
-            onClick={() => setIsChatOpen(true)}
-          >
-            <Image
-              src="https://socialmediamkt.softwarenicaragua.com/wp-content/uploads/2025/08/iri-icono-Sin-fondo.gif"
-              alt="Chat with Irï"
-              width={80}
-              height={80}
-              unoptimized
-              className=""
-            />
-          </button>
+          <div className="fixed bottom-6 right-6 z-40">
+            {/* Floating Message */}
+            {showFloatingMessage && (
+              <div className="absolute bottom-24 right-0 mb-4 mr-2 animate-float">
+                <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 p-4 max-w-xs relative">
+                  <button
+                    onClick={() => setShowFloatingMessage(false)}
+                    className="absolute top-2 right-2 text-gray-400 hover:text-gray-600 transition-colors"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                  <div className="absolute -bottom-2 right-6 w-4 h-4 bg-white border-r border-b border-gray-200 transform rotate-45"></div>
+                  <p className="text-sm text-gray-800 font-medium mb-2">
+                    ¡Hola! 👋 Soy <span className="text-blue-600 font-bold">Irï</span>
+                  </p>
+                  <p className="text-xs text-gray-600 mb-3">
+                    ¿Tienes preguntas sobre educación financiera? ¡Estoy aquí para ayudarte!
+                  </p>
+                  <div className="flex justify-end">
+                    <button
+                      onClick={() => {
+                        setIsChatOpen(true)
+                        setShowFloatingMessage(false)
+                      }}
+                      className="text-xs bg-blue-600 text-white px-3 py-1 rounded-full hover:bg-blue-700 transition-colors"
+                    >
+                      Chatear ahora
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+            
+            {/* Chat Button */}
+            <button
+              className="w-20 h-20 animate-pulse flex items-center justify-center bg-transparent relative"
+              onClick={() => setIsChatOpen(true)}
+            >
+              <div className="absolute inset-0 bg-blue-600 rounded-full animate-ping opacity-20"></div>
+              <div className="absolute top-1 right-1 w-4 h-4 bg-red-500 rounded-full flex items-center justify-center">
+                <span className="text-white text-xs font-bold">!</span>
+              </div>
+              <Image
+                src="https://socialmediamkt.softwarenicaragua.com/wp-content/uploads/2025/08/iri-icono-Sin-fondo.gif"
+                alt="Chat with Irï"
+                width={80}
+                height={80}
+                unoptimized
+                className="animate-float"
+              />
+            </button>
+          </div>
         )}
 
         <style jsx>{`
