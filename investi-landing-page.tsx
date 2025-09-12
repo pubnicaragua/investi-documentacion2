@@ -439,7 +439,7 @@ export default function InvestiLandingPage() {
       content:
         "Investï transformó mi comprensión sobre finanzas personales. Los cursos interactivos y la comunidad me ayudaron a desarrollar hábitos financieros saludables que nunca pensé que podría lograr.",
       avatar:
-        "https://socialmediamkt.softwarenicaragua.com/wp-content/uploads/2025/08/iri-icono-tipografia-Sin-fondo-.gif",
+        "https://randomuser.me/api/portraits/women/32.jpg",
       rating: 5,
     },
     {
@@ -448,7 +448,7 @@ export default function InvestiLandingPage() {
       content:
         "La plataforma educativa de Investï es increíble. Aprendí desde presupuesto básico hasta planificación financiera avanzada. Irï siempre está ahí para guiarme en mi proceso de aprendizaje.",
       avatar:
-        "https://socialmediamkt.softwarenicaragua.com/wp-content/uploads/2025/08/iri-icono-tipografia-Sin-fondo-.gif",
+        "https://randomuser.me/api/portraits/men/22.jpg",
       rating: 5,
     },
     {
@@ -457,7 +457,7 @@ export default function InvestiLandingPage() {
       content:
         "Como alguien sin conocimientos financieros, Investï me dio las herramientas y confianza para tomar control de mis finanzas. La educación gamificada hace que aprender sea divertido y efectivo.",
       avatar:
-        "https://socialmediamkt.softwarenicaragua.com/wp-content/uploads/2025/08/iri-icono-tipografia-Sin-fondo-.gif",
+        "https://randomuser.me/api/portraits/women/68.jpg",
       rating: 5,
     },
   ]
@@ -1126,13 +1126,12 @@ export default function InvestiLandingPage() {
                       {/* Avatar and name */}
                       <div className="flex items-center mt-6 ml-4">
                         <div className="relative">
-                          <Image
+                          <img
                             src={testimonial.avatar || "/placeholder.svg?height=50&width=50&query=professional avatar"}
                             width={50}
                             height={50}
                             alt={testimonial.name}
                             className="rounded-full border-4 border-white shadow-lg"
-                            unoptimized
                           />
                         </div>
                         <div className="ml-4">

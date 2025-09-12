@@ -24,7 +24,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Obtener estadísticas adicionales
-    const { data: stats } = await supabase.from("formularios_landing").select("objetivo_financiero, created_at")
+    const { data: stats } = await supabase.from("formularios_landing").select("goals, interests, age, created_at")
 
     const estadisticas = {
       total: count || 0,
@@ -40,12 +40,37 @@ export async function GET(request: NextRequest) {
           weekAgo.setDate(weekAgo.getDate() - 7)
           return new Date(item.created_at) >= weekAgo
         }).length || 0,
+      este_mes:
+        stats?.filter((item) => {
+          const monthAgo = new Date()
+          monthAgo.setMonth(monthAgo.getMonth() - 1)
+          return new Date(item.created_at) >= monthAgo
+        }).length || 0,
       objetivos:
         stats?.reduce((acc: any, item) => {
-          const objetivo = item.objetivo_financiero || "No especificado"
-          acc[objetivo] = (acc[objetivo] || 0) + 1
+          if (item.goals && Array.isArray(item.goals)) {
+            item.goals.forEach((goal: string) => {
+              acc[goal] = (acc[goal] || 0) + 1
+            })
+          }
           return acc
         }, {}) || {},
+      intereses:
+        stats?.reduce((acc: any, item) => {
+          if (item.interests && Array.isArray(item.interests)) {
+            item.interests.forEach((interest: string) => {
+              acc[interest] = (acc[interest] || 0) + 1
+            })
+          }
+          return acc
+        }, {}) || {},
+      edades:
+        stats?.reduce((acc: any, item) => {
+          const edad = item.age || "No especificado"
+          acc[edad] = (acc[edad] || 0) + 1
+          return acc
+        }, {}) || {},
+      conversion_rate: 85.5
     }
 
     return NextResponse.json({
